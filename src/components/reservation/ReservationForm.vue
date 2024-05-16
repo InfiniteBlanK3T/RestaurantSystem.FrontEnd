@@ -32,33 +32,15 @@
                   </v-menu>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-menu
-                    ref="timeMenu"
-                    v-model="timeMenuOpen"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    max-width="290px"
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ props }">
-                      <v-text-field
-                        v-model="reservation.time"
-                        label="Reservation Time"
-                        outlined
-                        dense
-                        readonly
-                        @blur="timeMenuOpen = false"
-                        v-bind="props"
-                        :rules="timeRules"
-                        required
-                      ></v-text-field>
-                    </template>
-                    <v-time-picker
-                      v-model="reservation.time"
-                      @click:minute="$refs.timeMenu.save(reservation.time)"
-                    ></v-time-picker>
-                  </v-menu>
+                  <v-text-field
+                    v-model="reservation.time"
+                    label="Reservation Time"
+                    outlined
+                    dense
+                    type="time"
+                    :rules="timeRules"
+                    required
+                  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
