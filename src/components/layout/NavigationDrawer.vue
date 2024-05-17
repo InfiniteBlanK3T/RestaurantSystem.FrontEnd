@@ -44,6 +44,19 @@
           <v-list-item-title>Reservations</v-list-item-title>
         </v-list-item>
       </router-link>
+      <v-divider></v-divider>
+      <router-link to="/profile" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-person</v-icon>
+          <v-list-item-title>Profile</v-list-item-title>
+        </v-list-item>
+      </router-link>
+      <router-link to="/orders/history" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-list-ul</v-icon>
+          <v-list-item-title>Order History</v-list-item-title>
+        </v-list-item>
+      </router-link>
 
       <v-divider></v-divider>
 
@@ -58,8 +71,6 @@
 </template>
 
 <script>
-import 'bootstrap-icons/font/bootstrap-icons.css'
-
 export default {
   name: 'NavigationDrawer',
   props: {

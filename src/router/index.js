@@ -25,9 +25,9 @@ import OrderTracker from '../components/order/OrderTracker.vue'
 import ReservationForm from '../components/reservation/ReservationForm.vue'
 import ReservationList from '../components/reservation/ReservationList.vue'
 
-// // User components
-// import UserProfile from '../components/user/UserProfile.vue'
-// import OrderHistory from '../components/user/OrderHistory.vue'
+// User components
+import UserProfile from '../components/user/UserProfile.vue'
+import OrderHistory from '../components/user/OrderHistory.vue'
 
 // // Dashboard components
 // import ReservationOverview from '../components/dashboard/ReservationOverview.vue'
@@ -47,8 +47,8 @@ const routes = [
   { path: '/orders', component: OrderTracker },
   { path: '/reservations/create', component: ReservationForm },
   { path: '/reservations', component: ReservationList },
-  //   { path: '/profile', component: UserProfile },
-  //   { path: '/orders/history', component: OrderHistory },
+  { path: '/profile', component: UserProfile },
+  { path: '/orders/history', component: OrderHistory },
   //   { path: '/dashboard/reservations', component: ReservationOverview },
   //   { path: '/dashboard/orders', component: OrderManagement },
   //   { path: '/dashboard/analytics', component: SalesAnalytics },

@@ -9,6 +9,11 @@ import 'vuetify/dist/vuetify.min.css'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
 const vuetify = createVuetify({
   components,
   directives
