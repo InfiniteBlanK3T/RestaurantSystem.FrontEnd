@@ -37,7 +37,7 @@
           <v-list-item-title>Orders</v-list-item-title>
         </v-list-item>
       </router-link>
-
+      <!-- User Dashboard -->
       <router-link to="/reservations" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
@@ -59,11 +59,23 @@
       </router-link>
 
       <v-divider></v-divider>
-
+      <!-- Admin Dashboard -->
       <router-link to="/admin" class="nav-link">
         <v-list-item link>
-          <v-icon class="mr-2 nav-icon">bi-gear</v-icon>
+          <v-icon class="mr-2 nav-icon" style="pointer-events: none">bi-gear</v-icon>
           <v-list-item-title>Admin</v-list-item-title>
+        </v-list-item>
+      </router-link>
+      <router-link to="/dashboard/reservations" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
+          <v-list-item-title>Reservations</v-list-item-title>
+        </v-list-item>
+      </router-link>
+      <router-link to="/dashboard/analytics" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-graph-up</v-icon>
+          <v-list-item-title>Analytics</v-list-item-title>
         </v-list-item>
       </router-link>
     </v-list>

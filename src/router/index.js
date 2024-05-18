@@ -30,9 +30,9 @@ import UserProfile from '../components/user/UserProfile.vue'
 import OrderHistory from '../components/user/OrderHistory.vue'
 
 // // Dashboard components
-// import ReservationOverview from '../components/dashboard/ReservationOverview.vue'
-// import OrderManagement from '../components/dashboard/OrderManagement.vue'
-// import SalesAnalytics from '../components/dashboard/SalesAnalytics.vue'
+import ReservationOverview from '../components/dashboard/ReservationOverview.vue'
+import OrderManagement from '../components/dashboard/OrderManagement.vue'
+import SalesAnalytics from '../components/dashboard/SalesAnalytics.vue'
 
 const routes = [
   { path: '/', component: HomeView },
@@ -49,9 +49,9 @@ const routes = [
   { path: '/reservations', component: ReservationList },
   { path: '/profile', component: UserProfile },
   { path: '/orders/history', component: OrderHistory },
-  //   { path: '/dashboard/reservations', component: ReservationOverview },
-  //   { path: '/dashboard/orders', component: OrderManagement },
-  //   { path: '/dashboard/analytics', component: SalesAnalytics },
+  { path: '/dashboard/reservations', component: ReservationOverview },
+  { path: '/dashboard/orders', component: OrderManagement },
+  { path: '/dashboard/analytics', component: SalesAnalytics },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
