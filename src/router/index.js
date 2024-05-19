@@ -9,7 +9,7 @@ import HomeView from '../components/HomeView.vue'
 
 // Auth components
 import LoginForm from '../components/auth/LoginForm.vue'
-//import RegisterForm from '../components/auth/RegisterForm.vue'
+import RegisterForm from '../components/auth/RegisterForm.vue'
 
 // Menu components
 import MenuList from '../components/menu/MenuList.vue'
@@ -37,7 +37,7 @@ import SalesAnalytics from '../components/dashboard/SalesAnalytics.vue'
 const routes = [
   { path: '/', component: HomeView },
   { path: '/login', component: LoginForm },
-  //{ path: '/register', component: RegisterForm },
+  { path: '/register', component: RegisterForm },
   { path: '/menu', component: MenuList },
   { path: '/menu/:id', component: MenuItemDetail },
   { path: '/menu/create', component: MenuItemForm },

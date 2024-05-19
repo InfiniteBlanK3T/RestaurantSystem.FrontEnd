@@ -10,7 +10,7 @@
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-img src="https://example.com/image.jpg" height="400"></v-img>
+              <v-img src="#" height="400"></v-img>
               <v-card-title>About Us</v-card-title>
               <v-card-text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel
