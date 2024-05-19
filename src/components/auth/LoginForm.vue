@@ -63,12 +63,18 @@ export default {
     return {
       username: '',
       password: '',
-      isLoggedIn: false,
-      loginAsCustomer: false,
-      loginAsStaff: false
+      isLoggedIn: false
     }
   },
   methods: {
+    loginAsCustomer() {
+      this.username = 'customer01'
+      this.password = 'customer01'
+    },
+    loginAsStaff() {
+      this.username = 'staff01'
+      this.password = 'staff01'
+    },
     login() {
       const credentials = {
         username: this.username,
@@ -100,10 +106,6 @@ export default {
           console.error('Login error:', error)
           alert('An error occurred while logging in. Please try again.')
         })
-    },
-    logInAsStaff() {
-      this.username = 'admin01'
-      this.password = 'admin01'
     },
     logout() {
       this.isLoggedIn = false

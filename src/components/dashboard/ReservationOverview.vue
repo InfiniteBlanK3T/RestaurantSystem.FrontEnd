@@ -62,12 +62,24 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <reservation-details-modal
+      v-if="showModal"
+      :selectedReservations="selectedReservations"
+      :modalTitle="modalTitle"
+      @close="closeModal"
+    />
   </v-container>
 </template>
 
 <script>
+import ReservationDetailsModal from './ReservationDetailsModal.vue'
+
 export default {
   name: 'ReservationOverview',
+  components: {
+    ReservationDetailsModal
+  },
   data() {
     return {
       headers: [
@@ -100,7 +112,10 @@ export default {
           guests: 6
         }
         // Add more reservations as needed
-      ]
+      ],
+      showModal: false,
+      selectedReservations: [],
+      modalTitle: ''
     }
   },
   computed: {
@@ -123,8 +138,14 @@ export default {
       return date.toLocaleDateString('en-US', options)
     },
     viewReservations(type) {
-      // Implement the logic to view reservations of the specified type
-      console.log(`View ${type} reservations`)
+      if (type === 'today') {
+        this.selectedReservations = this.todayReservations
+        this.modalTitle = "Today's Reservations"
+      } else if (type === 'upcoming') {
+        this.selectedReservations = this.upcomingReservations
+        this.modalTitle = 'Upcoming Reservations'
+      }
+      this.showModal = true
     },
     editReservation(reservation) {
       // Implement the logic to edit the reservation
@@ -133,6 +154,9 @@ export default {
     cancelReservation(reservation) {
       // Implement the logic to cancel the reservation
       console.log('Cancel reservation:', reservation)
+    },
+    closeModal() {
+      this.showModal = false
     }
   }
 }
