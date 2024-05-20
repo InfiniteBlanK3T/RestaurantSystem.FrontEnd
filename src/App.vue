@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <AppBar @toggleDrawer="toggleDrawer" :isLoggedIn="isLoggedIn" @logout="logout" />
+    <AppBar
+      @toggleDrawer="toggleDrawer"
+      :isLoggedIn="isLoggedIn"
+      :username="username"
+      @logout="logout"
+    />
     <NavigationDrawer v-model="isDrawerOpen" :cartItems="cartItems" />
     <v-main>
       <router-view
@@ -8,6 +13,7 @@
         @addToCart="addToCart"
         @updateCartItem="updateCartItem"
         @removeFromCart="removeFromCart"
+        @login="handleLogin"
       />
     </v-main>
   </v-app>
@@ -27,27 +33,32 @@ export default {
     return {
       isDrawerOpen: true,
       isLoggedIn: false,
-      cartItems: []
+      cartItems: [],
+      username: localStorage.getItem('username') || ''
     }
   },
   created() {
     this.isLoggedIn = this.checkLoginStatus()
   },
   methods: {
-    handleLogin() {
+    handleLogin(username) {
       this.isLoggedIn = true
+      this.username = username
     },
     logout() {
       this.clearLoginStatus()
       this.isLoggedIn = false
-      this.$router.push('/')
+      this.username = ''
+      this.$router.push('/login')
     },
     checkLoginStatus() {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('access')
       return !!token
     },
     clearLoginStatus() {
-      localStorage.removeItem('token')
+      localStorage.removeItem('access')
+      localStorage.removeItem('refresh')
+      localStorage.removeItem('username')
     },
     toggleDrawer() {
       this.isDrawerOpen = !this.isDrawerOpen

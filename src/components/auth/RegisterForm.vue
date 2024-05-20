@@ -7,11 +7,27 @@
           <v-card-text>
             <v-form ref="form" v-model="isFormValid" lazy-validation>
               <v-text-field
-                v-model="registerForm.name"
-                label="Full Name"
+                v-model="registerForm.firstName"
+                label="First Name"
                 outlined
                 dense
                 :rules="nameRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.lastName"
+                label="Last Name"
+                outlined
+                dense
+                :rules="nameRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.username"
+                label="User Name"
+                outlined
+                dense
+                :rules="usernameRules"
                 required
               ></v-text-field>
               <v-text-field
@@ -23,7 +39,7 @@
                 required
               ></v-text-field>
               <v-text-field
-                v-model="registerForm.password"
+                v-model="registerForm.password1"
                 label="Password"
                 outlined
                 dense
@@ -32,7 +48,7 @@
                 type="password"
               ></v-text-field>
               <v-text-field
-                v-model="registerForm.confirmPassword"
+                v-model="registerForm.password2"
                 label="Confirm Password"
                 outlined
                 dense
@@ -59,11 +75,17 @@ export default {
     return {
       isFormValid: true,
       registerForm: {
-        name: '',
+        firstName: '',
+        lastName: '',
+        username: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password1: '',
+        password2: ''
       },
+      usernameRules: [
+        (v) => !!v || 'Username is required',
+        (v) => /^[a-zA-Z\s]+$/.test(v) || 'Userame must contain only letters and spaces'
+      ],
       nameRules: [
         (v) => !!v || 'Name is required',
         (v) => /^[a-zA-Z\s]+$/.test(v) || 'Name must contain only letters and spaces'
@@ -78,17 +100,45 @@ export default {
       ],
       confirmPasswordRules: [
         (v) => !!v || 'Confirm password is required',
-        (v) => v === this.registerForm.password || 'Passwords do not match'
+        (v) => v === this.registerForm.password1 || 'Passwords do not match'
       ]
     }
   },
   methods: {
     register() {
       if (this.$refs.form.validate()) {
-        // Implement the logic to register the user
-        console.log('Register form data:', this.registerForm)
-        // Reset the form after successful registration
-        this.$refs.form.reset()
+        const data = {
+          username: this.registerForm.username,
+          email: this.registerForm.email,
+          password1: this.registerForm.password1,
+          password2: this.registerForm.password2,
+          first_name: this.registerForm.firstName,
+          last_name: this.registerForm.lastName
+        }
+        fetch('http://127.0.0.1:8000/api/register/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`)
+            }
+            return response.json()
+          })
+          .then(() => {
+            alert('Register Successful. Redirecting to Login Page.')
+            this.$refs.form.reset()
+            setTimeout(() => {
+              this.$router.push('/login')
+            }, 1000)
+          })
+          .catch((error) => {
+            console.error('Error:', error)
+            alert('Register Failed. Please try again.')
+          })
       }
     }
   }

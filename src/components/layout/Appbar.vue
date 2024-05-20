@@ -3,6 +3,7 @@
     <v-app-bar-nav-icon @click.stop="$emit('toggleDrawer')"></v-app-bar-nav-icon>
     <v-toolbar-title>Restaurant Information System</v-toolbar-title>
     <v-spacer></v-spacer>
+    <span v-if="isLoggedIn">Welcome, {{ username }}!</span>
     <v-btn text router to="/login" v-if="!isLoggedIn">
       Login
       <v-icon>mdi-login</v-icon>
@@ -21,11 +22,14 @@ export default {
     isLoggedIn: {
       type: Boolean,
       required: true
+    },
+    username: {
+      type: String,
+      default: ''
     }
   },
   methods: {
     logout() {
-      this.isLoggedIn = false
       this.$router.push('/login')
       this.$emit('logout')
     }

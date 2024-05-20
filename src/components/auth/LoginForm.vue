@@ -1,11 +1,5 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-spacer></v-spacer>
-      <v-btn v-if="isLoggedIn" @click="logout">
-        <router-link to="/login" replace>Logout<v-icon>mdi-logout</v-icon></router-link>
-      </v-btn>
-    </v-app-bar>
     <v-main>
       <v-container>
         <v-row justify="center">
@@ -68,12 +62,12 @@ export default {
   },
   methods: {
     loginAsCustomer() {
-      this.username = 'customer01'
-      this.password = 'customer01'
+      this.username = 'customer'
+      this.password = 'customer01@testing'
     },
     loginAsStaff() {
-      this.username = 'staff01'
-      this.password = 'staff01'
+      this.username = 'staff'
+      this.password = 'staff01@testing'
     },
     login() {
       const credentials = {
@@ -92,10 +86,19 @@ export default {
         },
         body: JSON.stringify(credentials)
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
         .then((data) => {
           if (data.success) {
+            localStorage.setItem('access', data.access)
+            localStorage.setItem('refresh', data.refresh)
+            localStorage.setItem('username', this.username)
             this.isLoggedIn = true
+            this.$emit('login', this.username)
             this.$router.push('/')
           } else {
             console.error(data.error)
@@ -106,10 +109,6 @@ export default {
           console.error('Login error:', error)
           alert('An error occurred while logging in. Please try again.')
         })
-    },
-    logout() {
-      this.isLoggedIn = false
-      this.$router.push('/login')
     },
     getCookie(name) {
       const value = `; ${document.cookie}`
