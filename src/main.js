@@ -9,6 +9,9 @@ import 'vuetify/dist/vuetify.min.css'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// Whale
+import '@fortawesome/fontawesome-free/css/all.css'
+
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'

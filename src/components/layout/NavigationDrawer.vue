@@ -72,6 +72,12 @@
           <v-list-item-title>Reservations</v-list-item-title>
         </v-list-item>
       </router-link>
+      <router-link to="/menu/create" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-plus-circle</v-icon>
+          <v-list-item-title>Add Menu Item</v-list-item-title>
+        </v-list-item>
+      </router-link>
       <router-link to="/dashboard/analytics" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-graph-up</v-icon>

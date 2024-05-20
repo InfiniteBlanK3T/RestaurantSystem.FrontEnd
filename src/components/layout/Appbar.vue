@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="$emit('toggleDrawer')"></v-app-bar-nav-icon>
+    <img sizes="8" src="./icons8-whale-94.png" alt="Logo" />
     <v-toolbar-title>Restaurant Information System</v-toolbar-title>
+
     <v-spacer></v-spacer>
     <span v-if="isLoggedIn">Welcome, {{ username }}!</span>
     <v-btn text router to="/login" v-if="!isLoggedIn">
