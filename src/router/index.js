@@ -17,7 +17,7 @@ import MenuItemDetail from '../components/menu/MenuItemDetail.vue'
 import MenuItemForm from '../components/menu/MenuItemForm.vue'
 
 // Order components
-import Cart from '../components/order/Cart.vue'
+import CartView from '../components/order/CartView.vue'
 import Checkout from '../components/order/Checkout.vue'
 import OrderTracker from '../components/order/OrderTracker.vue'
 
@@ -42,7 +42,7 @@ const routes = [
   { path: '/menu/:id', component: MenuItemDetail },
   { path: '/menu/create', component: MenuItemForm },
   { path: '/menu/:id/edit', component: MenuItemForm },
-  { path: '/cart', component: Cart },
+  { path: '/cart', component: CartView },
   { path: '/checkout', component: Checkout },
   { path: '/orders', component: OrderTracker },
   { path: '/reservations/create', component: ReservationForm },

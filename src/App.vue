@@ -64,18 +64,29 @@ export default {
       this.isDrawerOpen = !this.isDrawerOpen
     },
     addToCart(item) {
-      const existingItem = this.cartItems.find((cartItem) => cartItem.id === item.id)
+      let cartItems = localStorage.getItem('cartItems')
+
+      cartItems = cartItems ? JSON.parse(cartItems) : []
+
+      const existingItem = cartItems.find((cartItems) => cartItems.id === item.id)
       if (existingItem) {
-        existingItem.quantity++
+        existingItem.quantity += 1
       } else {
-        this.cartItems.push({ ...item, quantity: 1 })
+        cartItems.push({ ...item, quantity: 1 })
       }
+
+      localStorage.setItem('cartItems', JSON.stringify(cartItems))
+
+      this.cartItems = cartItems
     },
     updateCartItem(index, quantity) {
       this.cartItems[index].quantity = quantity
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
     },
     removeFromCart(index) {
       this.cartItems.splice(index, 1)
+
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
     }
   }
 }
