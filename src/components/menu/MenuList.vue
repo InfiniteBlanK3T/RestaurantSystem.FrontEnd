@@ -24,7 +24,34 @@ export default {
   data() {
     return {
       menuItems: [],
-      nextPage: 'http://127.0.0.1:8000/api/menu-items/'
+      nextPage: 'http://127.0.0.1:8000/api/menu-items/',
+      restaurantName: '',
+      pageSize: 6,
+      pageNumber: 1
+    }
+  },
+  method: {
+    async fetchMenuItems() {
+      while (this.nextPage) {
+        try {
+          const response = await fetch(
+            `${this.nextPage}?restaurant_name=${encodeURIComponent(this.restaurantName)}&page_size=${this.pageSize}&page=${this.pageNumber}`
+          )
+          const data = await response.json()
+          this.menuItems = [...this.menuItems, ...data.results]
+          this.nextPage = data.next
+          this.pageNumber += 1
+        } catch (error) {
+          console.error('There was an error:', error)
+          this.nextPage = null
+        }
+      }
+    },
+    onRestaurantNameChange(newName) {
+      this.restaurantName = newName
+      this.menuItems = []
+      this.pageNumber = 1
+      this.fetchMenuItems()
     }
   },
   async created() {
