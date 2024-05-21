@@ -1,71 +1,174 @@
 <template>
-    <div>
-      <h1 class="mb-4">Order Tracker</h1>
-      <v-card>
-        <v-card-title>Order Status</v-card-title>
-        <v-card-text>
-          <v-timeline dense>
-            <v-timeline-item color="primary" small>
-              <div>
-                <div class="font-weight-normal">
-                  <v-icon color="primary">mdi-check</v-icon>
-                  Order Placed
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <v-card class="mt-5">
+          <v-card-title class="headline"> Order Status </v-card-title>
+          <v-card-text>
+            <div class="order-status">
+              <div class="status-item" :class="{ completed: status >= 1 }">
+                <div class="status-icon">
+                  <v-progress-circular
+                    v-if="status === 1"
+                    indeterminate
+                    color="primary"
+                    :size="24"
+                    :width="4"
+                  ></v-progress-circular>
+                  <v-icon v-else>mdi-check</v-icon>
                 </div>
-                <span>{{ formatDate(orderPlacedAt) }}</span>
+                <div class="status-label">Order Placed</div>
               </div>
-            </v-timeline-item>
-            <v-timeline-item color="primary" small>
-              <div>
-                <div class="font-weight-normal">
-                  <v-icon color="primary">mdi-check</v-icon>
-                  Order Confirmed
+              <div class="status-item" :class="{ completed: status >= 2 }">
+                <div class="status-icon">
+                  <v-progress-circular
+                    v-if="status === 2"
+                    indeterminate
+                    color="primary"
+                    :size="24"
+                    :width="4"
+                  ></v-progress-circular>
+                  <v-icon v-else>mdi-check</v-icon>
                 </div>
-                <span>{{ formatDate(orderConfirmedAt) }}</span>
+                <div class="status-label">Order Confirmed</div>
               </div>
-            </v-timeline-item>
-            <v-timeline-item color="primary" small>
-              <div>
-                <div class="font-weight-normal">
-                  <v-icon color="primary">mdi-check</v-icon>
-                  Order Prepared
+              <div class="status-item" :class="{ completed: status >= 3 }">
+                <div class="status-icon">
+                  <v-progress-circular
+                    v-if="status === 3"
+                    indeterminate
+                    color="primary"
+                    :size="24"
+                    :width="4"
+                  ></v-progress-circular>
+                  <v-icon v-else>mdi-check</v-icon>
                 </div>
-                <span>{{ formatDate(orderPreparedAt) }}</span>
+                <div class="status-label">Order Prepared</div>
               </div>
-            </v-timeline-item>
-            <v-timeline-item color="primary" small>
-              <div>
-                <div class="font-weight-normal">
-                  <v-icon color="primary">mdi-truck-delivery</v-icon>
-                  Order Out for Delivery
+              <div class="status-item" :class="{ completed: status >= 4 }">
+                <div class="status-icon">
+                  <v-progress-circular
+                    v-if="status === 4"
+                    indeterminate
+                    color="primary"
+                    :size="24"
+                    :width="4"
+                  ></v-progress-circular>
+                  <v-icon v-else>mdi-check</v-icon>
                 </div>
-                <span>{{ formatDate(orderOutForDeliveryAt) }}</span>
+                <div class="status-label">Order Out for Delivery</div>
               </div>
-            </v-timeline-item>
-          </v-timeline>
-        </v-card-text>
-      </v-card>
+            </div>
+          </v-card-text>
+        </v-card>
+        <v-dialog v-model="showFeedbackDialog" max-width="500px">
+          <v-card>
+            <v-card-title class="headline"> Provide Feedback </v-card-title>
+            <v-card-text>
+              <div class="text-center">
+                <v-rating
+                  v-model="rating"
+                  :item-labels="['Bad', '', '', '', 'Excellence!']"
+                  item-label-position="bottom"
+                  hover
+                  size="64"
+                ></v-rating>
+              </div>
+              <v-textarea
+                v-model="description"
+                label="Description (Optional)"
+                outlined
+                rows="3"
+                class="mt-4"
+              ></v-textarea>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="submitFeedback">Submit</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'OrderTracker',
-    data() {
-      return {
-        orderPlacedAt: new Date(),
-        orderConfirmedAt: new Date(Date.now() + 5 * 60 * 1000), // 5 minutes from now
-        orderPreparedAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes from now
-        orderOutForDeliveryAt: new Date(Date.now() + 30 * 60 * 1000) // 30 minutes from now
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      status: 0,
+      showFeedbackDialog: false,
+      rating: 3,
+      description: ''
+    }
+  },
+  mounted() {
+    this.startStatusAnimation()
+  },
+  methods: {
+    startStatusAnimation() {
+      const totalStatuses = 5
+      let currentStatus = 1
+
+      const animateStatus = () => {
+        this.status = currentStatus
+        currentStatus++
+
+        if (currentStatus <= totalStatuses) {
+          setTimeout(animateStatus, 3000)
+        } else {
+          this.showFeedbackDialog = true
+        }
       }
+
+      animateStatus()
     },
-    methods: {
-      formatDate(date) {
-        return new Intl.DateTimeFormat('en-US', {
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true
-        }).format(date)
-      }
+    submitFeedback() {
+      // Call the feedback API here with the rating and description
+      console.log('Submitting feedback:', this.rating, this.description)
+
+      // Reset the feedback dialog
+      this.rating = 0
+      this.description = ''
+      this.showFeedbackDialog = false
     }
   }
-  </script>
+}
+</script>
+
+<style scoped>
+.order-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.status-item.completed .status-icon {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-label {
+  font-size: 14px;
+  text-align: center;
+}
+</style>

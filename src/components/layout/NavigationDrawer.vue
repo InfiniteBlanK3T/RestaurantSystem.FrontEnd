@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app permanent width="110" color="light-blue lighten-5">
+  <v-navigation-drawer app permanent width="150" color="light-blue lighten-5">
     <v-list dense nav>
       <router-link to="/" class="nav-link">
         <v-list-item link>
@@ -44,11 +44,16 @@
           <v-list-item-title>Reservations</v-list-item-title>
         </v-list-item>
       </router-link>
-      <v-divider></v-divider>
       <router-link to="/profile" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-person</v-icon>
           <v-list-item-title>Profile</v-list-item-title>
+        </v-list-item>
+      </router-link>
+      <router-link to="/orders" class="nav-link">
+        <v-list-item link>
+          <v-icon class="mr-2 nav-icon">bi-cart-check</v-icon>
+          <v-list-item-title>Order Tracker</v-list-item-title>
         </v-list-item>
       </router-link>
       <router-link to="/orders/history" class="nav-link">
@@ -57,8 +62,6 @@
           <v-list-item-title>Order History</v-list-item-title>
         </v-list-item>
       </router-link>
-
-      <v-divider></v-divider>
       <!-- Admin Dashboard -->
       <router-link to="/admin" class="nav-link">
         <v-list-item link>
@@ -111,6 +114,8 @@ export default {
   color: inherit;
   left: 0;
   right: 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-icon {
