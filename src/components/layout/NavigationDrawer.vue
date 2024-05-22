@@ -31,29 +31,23 @@
         </v-list-item>
       </router-link>
 
-      <router-link to="/checkout" class="nav-link">
+      <router-link v-if="cartItems.length > 0" to="/checkout" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-card-list</v-icon>
-          <v-list-item-title>Orders</v-list-item-title>
+          <v-list-item-title>Checkout</v-list-item-title>
         </v-list-item>
       </router-link>
       <!-- User Dashboard -->
-      <router-link to="/reservations" class="nav-link">
+      <router-link to="/reservations/create" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
-          <v-list-item-title>Reservations</v-list-item-title>
+          <v-list-item-title>Book a reservations!</v-list-item-title>
         </v-list-item>
       </router-link>
       <router-link to="/profile" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-person</v-icon>
           <v-list-item-title>Profile</v-list-item-title>
-        </v-list-item>
-      </router-link>
-      <router-link to="/orders" class="nav-link">
-        <v-list-item link>
-          <v-icon class="mr-2 nav-icon">bi-cart-check</v-icon>
-          <v-list-item-title>Order Tracker</v-list-item-title>
         </v-list-item>
       </router-link>
       <router-link to="/orders/history" class="nav-link">

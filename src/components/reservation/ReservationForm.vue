@@ -8,28 +8,14 @@
             <v-form ref="form" v-model="isFormValid" lazy-validation>
               <v-row>
                 <v-col cols="12" md="6">
-                  <v-menu
-                    ref="dateMenu"
-                    v-model="dateMenuOpen"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ props }">
-                      <v-text-field
-                        v-model="formattedDate"
-                        label="Reservation Date"
-                        outlined
-                        dense
-                        readonly
-                        @blur="dateMenuOpen = false"
-                        v-bind="props"
-                        required
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="reservation.date"></v-date-picker>
-                  </v-menu>
+                  <v-text-field
+                    v-model="reservation.date"
+                    label="Reservation Date"
+                    outlined
+                    dense
+                    :rules="dateRules"
+                    required
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-text-field
@@ -104,17 +90,13 @@
 </template>
 
 <script>
-import { format } from 'date-fns'
-
 export default {
   name: 'ReservationForm',
   data() {
     return {
       isFormValid: true,
-      dateMenuOpen: false,
-      timeMenuOpen: false,
       reservation: {
-        date: null,
+        date: '',
         time: null,
         fullName: '',
         phoneNumber: '',
@@ -133,6 +115,10 @@ export default {
       seatsRules: [
         (v) => !!v || 'Number of seats is required',
         (v) => v > 0 || 'Number of seats must be greater than 0'
+      ],
+      dateRules: [
+        (v) => !!v || 'Date is required',
+        (v) => /^\d{2}-\d{2}-\d{4}$/.test(v) || 'Invalid date format. Use DD-MM-YYYY'
       ]
     }
   },
@@ -144,11 +130,6 @@ export default {
         // Reset the form after submission
         this.$refs.form.reset()
       }
-    }
-  },
-  computed: {
-    formattedDate() {
-      return this.reservation.date ? format(this.reservation.date, 'dd/MM/yyyy') : ''
     }
   }
 }

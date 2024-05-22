@@ -4,6 +4,9 @@
       <div class="col-md-8">
         <v-card class="mt-5">
           <v-card-title class="headline"> Order Status </v-card-title>
+          <v-card-subtitle class="p-3 mb-2 bg-warning text-dark">
+            This is just quick mock process. Hang on in 10s .... cheers!
+          </v-card-subtitle>
           <v-card-text>
             <div class="order-status">
               <div class="status-item" :class="{ completed: status >= 1 }">
@@ -124,9 +127,23 @@ export default {
 
       animateStatus()
     },
-    submitFeedback() {
-      // Call the feedback API here with the rating and description
-      console.log('Submitting feedback:', this.rating, this.description)
+    async submitFeedback() {
+      const accessToken = localStorage.getItem('access')
+
+      const feedback = {
+        order: this.orderId,
+        rating: this.rating,
+        comment: this.description
+      }
+
+      await fetch('http://localhost:8000/api/feedbacks/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(feedback)
+      })
 
       // Reset the feedback dialog
       this.rating = 0

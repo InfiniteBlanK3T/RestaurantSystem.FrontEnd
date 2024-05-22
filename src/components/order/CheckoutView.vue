@@ -184,7 +184,7 @@ export default {
       this.accessToken = localStorage.getItem('access')
       this.isLoading = true
       try {
-        await fetch('http://127.0.0.1:8000/api/orders/', {
+        const response = await fetch('http://127.0.0.1:8000/api/orders/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -192,6 +192,13 @@ export default {
           },
           body: JSON.stringify(this.order)
         })
+        if (response.ok) {
+          const data = await response.json()
+
+          localStorage.setItem('order', data.id)
+        } else {
+          throw new Error('Failed to place order', response.statusText)
+        }
       } catch (error) {
         console.error('Failed to place order:', error)
       }

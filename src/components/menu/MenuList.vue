@@ -2,6 +2,9 @@
   <v-container>
     <v-row>
       <v-col cols="12">
+        <p v-if="!restaurantName" class="p-3 mb-2 bg-info text-white">
+          Please select your Restaurant!
+        </p>
         <v-select
           :items="restaurants"
           label="Select a restaurant"
@@ -27,6 +30,7 @@
     </v-row>
     <v-divider></v-divider>
     <paginate
+      v-if="restaurantName"
       :page-count="pageCount"
       :click-handler="changePage"
       :prev-text="'Prev'"
