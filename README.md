@@ -1,7 +1,6 @@
 # Restaurant Information System
 
-![Uploading image.png…]()
-
+![image](https://github.com/InfiniteBlanK3T/RestaurantSystem.FrontEnd/assets/94949422/bfc8aa6e-4377-41d7-8b85-9597e139f8a9)
 
 ## Recommended IDE Setup
 
