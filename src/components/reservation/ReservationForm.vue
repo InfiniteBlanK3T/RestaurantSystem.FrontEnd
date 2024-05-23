@@ -6,6 +6,16 @@
           <v-card-title class="text-h5 font-weight-bold mb-4">Make a Reservation</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="isFormValid" lazy-validation>
+              <v-col cols="12">
+                <p v-if="!restaurantName" class="p-3 mb-2 bg-info text-white">
+                  Please select your Restaurant!
+                </p>
+                <v-select
+                  :items="restaurants"
+                  label="Select a restaurant"
+                  v-model="restaurantName"
+                ></v-select>
+              </v-col>
               <v-row>
                 <v-col cols="12" md="6">
                   <v-text-field
@@ -25,28 +35,6 @@
                     dense
                     type="time"
                     :rules="timeRules"
-                    required
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="reservation.fullName"
-                    label="Full Name"
-                    outlined
-                    dense
-                    :rules="nameRules"
-                    required
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="reservation.phoneNumber"
-                    label="Phone Number"
-                    outlined
-                    dense
-                    :rules="phoneRules"
                     required
                   ></v-text-field>
                 </v-col>
@@ -79,13 +67,25 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submitReservation" :disabled="!isFormValid">
+            <v-btn color="primary" @click="submitReservation" block :disabled="!isFormValid">
               Submit Reservation
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+    <v-dialog v-model="reservationConfirmedDialog" max-width="400">
+      <v-card>
+        <v-card-title>Reservation Submitted</v-card-title>
+        <v-card-text>
+          <v-icon color="success" size="64">mdi-check-circle</v-icon>
+          <p>Thank you! Your reservation has been submitted successfully.</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" text @click="backToMenu">Back to Home</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -94,15 +94,21 @@ export default {
   name: 'ReservationForm',
   data() {
     return {
+      isLoading: false,
+      reservationConfirmedDialog: false,
       isFormValid: true,
       reservation: {
         date: '',
         time: null,
-        fullName: '',
-        phoneNumber: '',
         numberOfSeats: 1,
         message: ''
       },
+      restaurants: [
+        'Relaxing Koala - Branch 1',
+        'Relaxing Koala - Branch 2',
+        'Relaxing Koala - Branch 3'
+      ],
+      restaurantName: '',
       nameRules: [
         (v) => !!v || 'Full name is required',
         (v) => /^[a-zA-Z\s]+$/.test(v) || 'Name must contain only letters and spaces'
@@ -118,18 +124,55 @@ export default {
       ],
       dateRules: [
         (v) => !!v || 'Date is required',
-        (v) => /^\d{2}-\d{2}-\d{4}$/.test(v) || 'Invalid date format. Use DD-MM-YYYY'
+        (v) => /^\d{4}-\d{2}-\d{2}$/.test(v) || 'Invalid date format. Use YYYY-MM-DD'
       ]
     }
   },
   methods: {
-    submitReservation() {
+    async submitReservation() {
       if (this.$refs.form.validate()) {
-        // Handle form submission logic here
-        console.log('Reservation data:', this.reservation)
-        // Reset the form after submission
-        this.$refs.form.reset()
+        const restaurantMapping = {
+          'Relaxing Koala - Branch 1': 1,
+          'Relaxing Koala - Branch 2': 2,
+          'Relaxing Koala - Branch 3': 3
+        }
+
+        const data = {
+          restaurant: restaurantMapping[this.restaurantName],
+          date: this.reservation.date,
+          time: this.reservation.time,
+          party_size: this.reservation.numberOfSeats
+        }
+
+        this.isLoading = true
+        try {
+          const response = await fetch('http://127.0.0.1:8000/api/reservations/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('access')}`
+            },
+            body: JSON.stringify(data)
+          })
+
+          if (!response.ok) {
+            console.error('Error:', response.statusText)
+          } else {
+            console.log('Reservation submitted successfully')
+          }
+        } catch (error) {
+          console.error('Error:', error)
+        }
+
+        setTimeout(() => {
+          this.isLoading = false
+          this.reservationConfirmedDialog = true
+        }, 2000)
       }
+    },
+    backToMenu() {
+      this.$router.push('/')
+      this.reservationConfirmedDialog = false
     }
   }
 }
