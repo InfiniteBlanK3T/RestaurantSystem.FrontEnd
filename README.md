@@ -1,6 +1,6 @@
-# test-02
+# Restaurant Information System
 
-This template should help get you started developing with Vue 3 in Vite.
+![image](https://github.com/InfiniteBlanK3T/RestaurantSystem.FrontEnd/assets/94949422/bfc8aa6e-4377-41d7-8b85-9597e139f8a9)
 
 ## Recommended IDE Setup
 
