@@ -9,7 +9,10 @@
         <h2>{{ menuItem.name }}</h2>
         <p>{{ menuItem.description }}</p>
         <p>Price: ${{ menuItem.price }}</p>
-        <v-btn color="primary" @click="addToCart(menuItem)">Add to Cart</v-btn>
+        <v-btn v-if="isLoggedIn" color="primary" @click="addToCart(menuItem)">Add to Cart</v-btn>
+        <v-btn v-else color="secondary" to="/login"
+          >Sign Up or Login with us before adding to Cart</v-btn
+        >
       </div>
     </div>
   </div>
@@ -27,6 +30,11 @@ export default {
     const response = await fetch(`http://127.0.0.1:8000/api/menu-items/${this.$route.params.id}`)
     const data = await response.json()
     this.menuItem = data
+  },
+  computed: {
+    isLoggedIn() {
+      return !!localStorage.getItem('access')
+    }
   },
   methods: {
     addToCart(item) {
