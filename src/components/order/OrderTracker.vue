@@ -4,9 +4,12 @@
       <div class="col-md-8">
         <v-card class="mt-5">
           <v-card-title class="headline"> Order Status </v-card-title>
-          <v-card-subtitle class="p-3 mb-2 bg-warning text-dark">
-            This is just quick mock process. Hang on in 10s .... cheers!
-          </v-card-subtitle>
+          <v-alert
+            density="compact"
+            text="Just a mock process of order status. No real-time data."
+            title="Warning -- DEMO VERSION --"
+            type="warning"
+          ></v-alert>
           <v-card-text>
             <div class="order-status">
               <div class="status-item" :class="{ completed: status >= 1 }">
@@ -79,7 +82,7 @@
               </div>
               <v-textarea
                 v-model="description"
-                label="Description (Optional)"
+                label="Comments"
                 outlined
                 rows="3"
                 class="mt-4"
@@ -149,6 +152,7 @@ export default {
       this.rating = 0
       this.description = ''
       this.showFeedbackDialog = false
+      this.$router.push('/menu')
     }
   }
 }

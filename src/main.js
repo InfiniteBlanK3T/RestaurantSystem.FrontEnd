@@ -5,7 +5,6 @@ import router from './router'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -22,4 +21,19 @@ const vuetify = createVuetify({
   directives
 })
 
-createApp(App).use(router).use(vuetify).mount('#app')
+const app = createApp(App)
+
+// Register the custom directive globally
+app.directive('pulse-on-hover', {
+  bind(el, binding, vnode) {
+    el.style.transition = 'transform 1s ease'
+    el.onmouseover = function () {
+      el.style.transform = 'scale(1.1)'
+    }
+    el.onmouseout = function () {
+      el.style.transform = ''
+    }
+  }
+})
+
+app.use(router).use(vuetify).mount('#app')

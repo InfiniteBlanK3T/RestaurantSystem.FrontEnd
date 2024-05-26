@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="4">
-        <v-card class="elevation-4 rounded-lg">
+        <v-card v-hover-highlight class="elevation-4 rounded-lg">
           <v-card-title class="text-h6 font-weight-bold">Total Revenue</v-card-title>
           <v-card-text>
             <div class="text-h4 font-weight-bold mb-2">${{ totalRevenue.toFixed(2) }}</div>
@@ -15,7 +15,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card class="elevation-4 rounded-lg">
+        <v-card v-hover-highlight class="elevation-4 rounded-lg">
           <v-card-title class="text-h6 font-weight-bold">Orders Placed</v-card-title>
           <v-card-text>
             <div class="text-h4 font-weight-bold mb-2">{{ ordersPlaced }}</div>
@@ -23,7 +23,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card class="elevation-4 rounded-lg">
+        <v-card v-hover-highlight class="elevation-4 rounded-lg">
           <v-card-title class="text-h6 font-weight-bold">Average Order Value</v-card-title>
           <v-card-text>
             <div class="text-h4 font-weight-bold mb-2">${{ averageOrderValue.toFixed(2) }}</div>
@@ -32,8 +32,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6">
-        <v-card class="elevation-4 rounded-lg">
+      <v-col cols="12" md="7">
+        <v-card v-hover-highlight class="elevation-4 rounded-lg">
           <v-card-title class="text-h6 font-weight-bold">Popular Menu Items</v-card-title>
           <v-card-text>
             <v-data-table
@@ -42,15 +42,21 @@
               :items-per-page="5"
               class="elevation-1"
             >
-              <template v-slot:item.quantity="{ item }">
-                <span>{{ item.quantity }}</span>
+              <template v-slot:item.menu_item__name="{ item }">
+                <span>{{ item.menu_item__name }}</span>
+              </template>
+              <template v-slot:item.menu_item__price="{ item }">
+                <span>${{ item.menu_item__price.toFixed(2) }}</span>
+              </template>
+              <template v-slot:item.count="{ item }">
+                <span>{{ item.count }}</span>
               </template>
             </v-data-table>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="6">
-        <v-card class="elevation-4 rounded-lg">
+      <v-col cols="12" md="5">
+        <v-card v-hover-highlight class="elevation-4 rounded-lg">
           <v-card-title class="text-h6 font-weight-bold">Sales by Month</v-card-title>
           <v-card-text>
             <line-chart :data="chartData" :options="salesByMonthOptions" />
@@ -80,22 +86,30 @@ export default {
   components: {
     LineChart
   },
+  directives: {
+    'hover-highlight': {
+      bind(el, binding, vnode) {
+        el.style.transition = 'background-color 0.5s ease'
+        el.onmouseover = function () {
+          el.style.backgroundColor = binding.value || '#f5f5f5'
+        }
+        el.onmouseout = function () {
+          el.style.backgroundColor = ''
+        }
+      }
+    }
+  },
   data() {
     return {
-      totalRevenue: 5678.99,
-      ordersPlaced: 245,
-      averageOrderValue: 23.18,
+      totalRevenue: 0,
+      ordersPlaced: 0,
+      averageOrderValue: 0,
       popularMenuItemsHeaders: [
-        { text: 'Menu Item', value: 'name' },
-        { text: 'Quantity Sold', value: 'quantity' }
+        { title: 'Menu Item', value: 'menu_item__name' },
+        { title: 'Price', value: 'menu_item__price' },
+        { title: 'Quantity Sold', value: 'count' }
       ],
-      popularMenuItems: [
-        { name: 'Margherita Pizza', quantity: 125 },
-        { name: 'Caesar Salad', quantity: 98 },
-        { name: 'Spaghetti Bolognese', quantity: 82 },
-        { name: 'Grilled Salmon', quantity: 71 },
-        { name: 'Chocolate Cake', quantity: 63 }
-      ],
+      popularMenuItems: [],
       chartData: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [
@@ -121,6 +135,20 @@ export default {
         }
       }
     }
+  },
+  created() {
+    fetch('http://127.0.0.1:8000/api/sales-analytics/', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.totalRevenue = data.total_revenue
+        this.ordersPlaced = data.orders_placed
+        this.averageOrderValue = data.average_order_value
+        this.popularMenuItems = data.popular_menu_items
+      })
   }
 }
 </script>

@@ -12,12 +12,14 @@
                     v-model="username"
                     label="Username"
                     type="username"
+                    prepend-icon="mdi-account"
                     required
                   ></v-text-field>
                   <v-text-field
                     v-model="password"
                     label="Password"
                     type="password"
+                    prepend-icon="mdi-lock"
                     required
                   ></v-text-field>
                   <v-row>

@@ -25,7 +25,7 @@
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(item, index) in cartItems" :key="item.id">
         <v-card>
-          <v-img :src="item.image" aspect-ratio="1.7"></v-img>
+          <v-img :src="item.image_url" aspect-ratio="1.7"></v-img>
           <v-card-title class="headline">{{ item.name }}</v-card-title>
           <v-card-subtitle>{{ item.description }}</v-card-subtitle>
           <v-card-text>

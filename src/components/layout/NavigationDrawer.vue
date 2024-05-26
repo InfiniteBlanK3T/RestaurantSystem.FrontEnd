@@ -101,9 +101,6 @@ export default {
     cartItemCount() {
       return this.cartItems.reduce((total, item) => total + item.quantity, 0)
     }
-  },
-  mounted() {
-    console.log('User role in ND:', this.userRole)
   }
 }
 </script>

@@ -56,7 +56,7 @@ export default {
         const data = await response.json()
         this.userRole = data.results[0].role
         // Debugging Console
-        console.log('User role in APP:', data.results[0].role)
+        // console.log('User role in APP:', data.results[0].role)
       } catch (error) {
         console.error('Error fetching user role:', error)
       }

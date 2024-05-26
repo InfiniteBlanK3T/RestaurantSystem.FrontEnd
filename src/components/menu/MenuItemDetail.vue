@@ -3,7 +3,7 @@
     <h1 class="mb-4">Menu Item Details</h1>
     <div class="row">
       <div class="col-md-6">
-        <v-img :src="menuItem.image" height="400px"></v-img>
+        <v-img :src="menuItem.image_url" height="400px"></v-img>
       </div>
       <div class="col-md-6">
         <h2>{{ menuItem.name }}</h2>

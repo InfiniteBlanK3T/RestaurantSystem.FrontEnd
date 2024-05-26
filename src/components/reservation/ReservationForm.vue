@@ -67,7 +67,13 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submitReservation" block :disabled="!isFormValid">
+            <v-btn
+              color="primary"
+              @click="submitReservation"
+              variant="flat"
+              block
+              :disabled="!isFormValid"
+            >
               Submit Reservation
             </v-btn>
           </v-card-actions>
@@ -82,7 +88,7 @@
           <p>Thank you! Your reservation has been submitted successfully.</p>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" text @click="backToMenu">Back to Home</v-btn>
+          <v-btn color="primary" text @click="backToMenu" block variant="flat">Back to Home</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -145,13 +151,12 @@ export default {
         }
 
         this.isLoading = true
-        this.accesToken = localStorage.getItem('access')
         try {
           const response = await fetch('http://127.0.0.1:8000/api/reservations/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${this.accessToken}}`
+              Authorization: `Bearer ${localStorage.getItem('access')}`
             },
             body: JSON.stringify(data)
           })

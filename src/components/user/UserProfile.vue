@@ -5,6 +5,13 @@
         <v-card class="elevation-4">
           <v-card-title class="text-h5 font-weight-bold mb-4">User Profile</v-card-title>
           <v-card-text>
+            <v-alert
+              density="compact"
+              text="This feature not supports yet - Just DEMO DATA**"
+              title="Warning -- DEMO VERSION"
+              type="warning"
+            ></v-alert>
+            <br />
             <v-row>
               <v-col cols="12" md="6">
                 <v-avatar size="150" color="primary" class="mb-4">
@@ -54,7 +61,9 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="updateProfile">Update Profile</v-btn>
+            <v-btn color="primary" @click="updateProfile" block variant="flat"
+              >Update Profile</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>

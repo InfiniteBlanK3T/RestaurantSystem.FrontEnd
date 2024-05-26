@@ -58,26 +58,36 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="editReservation.user" label="Name" required></v-text-field>
+            <v-text-field
+              v-model="editReservation.user"
+              label="Name"
+              prepend-icon="mdi-account"
+              readonly
+              disabled
+            ></v-text-field>
             <v-select
-              v-model="editReservation.restaurant"
               :items="restaurants"
               label="Restaurant"
-              required
+              prepend-icon="mdi-food-fork-drink"
+              readonly
+              disabled
             ></v-select>
             <v-text-field
               v-model="editReservation.date"
               label="Reservation Date"
+              prepend-icon="mdi-calendar"
               required
             ></v-text-field>
             <v-text-field
               v-model="editReservation.time"
               label="Reservation Time"
+              prepend-icon="mdi-clock-time-four-outline"
               required
             ></v-text-field>
             <v-text-field
               v-model="editReservation.party_size"
               label="Guests"
+              prepend-icon="mdi-account-group"
               required
             ></v-text-field>
           </v-form>

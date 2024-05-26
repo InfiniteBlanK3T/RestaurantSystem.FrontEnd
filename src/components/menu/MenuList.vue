@@ -2,27 +2,40 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <p v-if="!restaurantName" class="p-3 mb-2 bg-info text-white">
-          Please select your Restaurant!
-        </p>
+        <v-alert
+          v-if="!restaurantName"
+          text="Please selecte your restaurant to view the menu items!"
+          title="Hi there!"
+          type="info"
+          variant="tonal"
+        ></v-alert>
         <v-select
           :items="restaurants"
           label="Select a restaurant"
           v-model="restaurantName"
+          prepend-icon="mdi-search-web"
         ></v-select>
+        <v-alert
+          v-if="restaurantName === 'Relaxing Koala - Branch 4'"
+          density="compact"
+          text="Relaxing Koala - Branch 4 is Demo Testing environment - Adding new MenuItem to Restaurant"
+          title="Warning"
+          type="warning"
+        ></v-alert>
+        <br />
         <v-btn @click="onRestaurantNameChange">Search</v-btn>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" sm="4" md="4" lg="3" v-for="item in paginatedData" :key="item.id">
         <v-card>
-          <v-img :src="item.image" aspect-ratio="1.7"></v-img>
+          <v-img :src="item.image_url" aspect-ratio="1.7"></v-img>
           <v-card-title class="headline">{{ item.name }}</v-card-title>
           <v-card-subtitle>{{ item.description }}</v-card-subtitle>
           <v-card-actions>
             <v-spacer></v-spacer>
             <router-link :to="`/menu/${item.id}`">
-              <v-btn color="primary" text>View Details</v-btn>
+              <v-btn color="primary" text v-pulse-on-hover block variant="flat">View Details</v-btn>
             </router-link>
           </v-card-actions>
         </v-card>
@@ -58,7 +71,8 @@ export default {
       restaurants: [
         'Relaxing Koala - Branch 1',
         'Relaxing Koala - Branch 2',
-        'Relaxing Koala - Branch 3'
+        'Relaxing Koala - Branch 3',
+        'Relaxing Koala - Branch 4'
       ]
     }
   },
