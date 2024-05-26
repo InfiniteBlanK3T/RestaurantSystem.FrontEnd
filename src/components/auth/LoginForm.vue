@@ -99,7 +99,8 @@ export default {
             localStorage.setItem('username', this.username)
             this.isLoggedIn = true
             this.$emit('login', this.username)
-            this.$router.push('/')
+
+            this.$router.push('/').then(() => window.location.reload())
           } else {
             console.error(data.error)
             alert('Login failed. Incorrect username or password. Please try again.')

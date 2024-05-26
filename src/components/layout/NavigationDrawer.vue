@@ -38,44 +38,39 @@
         </v-list-item>
       </router-link>
       <!-- User Dashboard -->
-      <router-link to="/reservations/create" class="nav-link">
+      <router-link v-if="userRole === 'customer'" link to="/reservations/create" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
           <v-list-item-title>Book a reservations!</v-list-item-title>
         </v-list-item>
       </router-link>
-      <router-link to="/profile" class="nav-link">
+
+      <router-link to="/profile" v-if="isLoggedIn" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-person</v-icon>
           <v-list-item-title>Profile</v-list-item-title>
         </v-list-item>
       </router-link>
-      <router-link to="/orders/history" class="nav-link">
+      <router-link v-if="userRole === 'customer'" link to="/orders/history" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-list-ul</v-icon>
           <v-list-item-title>Order History</v-list-item-title>
         </v-list-item>
       </router-link>
       <!-- Admin Dashboard -->
-      <router-link to="/admin" class="nav-link">
-        <v-list-item link>
-          <v-icon class="mr-2 nav-icon" style="pointer-events: none">bi-gear</v-icon>
-          <v-list-item-title>Admin</v-list-item-title>
-        </v-list-item>
-      </router-link>
-      <router-link to="/dashboard/reservations" class="nav-link">
+      <router-link v-if="userRole === 'staff'" link to="/dashboard/reservations" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
           <v-list-item-title>Reservations</v-list-item-title>
         </v-list-item>
       </router-link>
-      <router-link to="/menu/create" class="nav-link">
+      <router-link v-if="userRole === 'staff'" to="/menu/create" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-plus-circle</v-icon>
           <v-list-item-title>Add Menu Item</v-list-item-title>
         </v-list-item>
       </router-link>
-      <router-link to="/dashboard/analytics" class="nav-link">
+      <router-link v-if="userRole === 'staff'" to="/dashboard/analytics" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-graph-up</v-icon>
           <v-list-item-title>Analytics</v-list-item-title>
@@ -92,12 +87,23 @@ export default {
     cartItems: {
       type: Array,
       required: true
+    },
+    userRole: {
+      type: String,
+      required: true
+    },
+    isLoggedIn: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
     cartItemCount() {
       return this.cartItems.reduce((total, item) => total + item.quantity, 0)
     }
+  },
+  mounted() {
+    console.log('User role in ND:', this.userRole)
   }
 }
 </script>

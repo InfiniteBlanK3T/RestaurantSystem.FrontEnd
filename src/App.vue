@@ -6,7 +6,12 @@
       :username="username"
       @logout="logout"
     />
-    <NavigationDrawer v-model="isDrawerOpen" :cartItems="cartItems" />
+    <NavigationDrawer
+      v-model="isDrawerOpen"
+      :cartItems="cartItems"
+      :userRole="userRole"
+      :isLoggedIn="isLoggedIn"
+    />
     <v-main>
       <router-view
         :cartItems="cartItems"
@@ -34,11 +39,28 @@ export default {
       isDrawerOpen: true,
       isLoggedIn: false,
       cartItems: [],
-      username: localStorage.getItem('username') || ''
+      username: localStorage.getItem('username') || '',
+      userRole: ''
     }
   },
-  created() {
+  async created() {
     this.isLoggedIn = this.checkLoginStatus()
+    if (this.isLoggedIn) {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/users/', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('access')}`
+          }
+        })
+        const data = await response.json()
+        this.userRole = data.results[0].role
+        // Debugging Console
+        console.log('User role in APP:', data.results[0].role)
+      } catch (error) {
+        console.error('Error fetching user role:', error)
+      }
+    }
   },
   methods: {
     handleLogin(username) {
@@ -49,7 +71,7 @@ export default {
       this.clearLoginStatus()
       this.isLoggedIn = false
       this.username = ''
-      this.$router.push('/login')
+      this.$router.push('/').then(() => window.location.reload())
     },
     checkLoginStatus() {
       const token = localStorage.getItem('access')

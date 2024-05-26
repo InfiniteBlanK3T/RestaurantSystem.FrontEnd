@@ -145,12 +145,13 @@ export default {
         }
 
         this.isLoading = true
+        this.accesToken = localStorage.getItem('access')
         try {
           const response = await fetch('http://127.0.0.1:8000/api/reservations/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('access')}`
+              Authorization: `Bearer ${this.accessToken}}`
             },
             body: JSON.stringify(data)
           })
@@ -159,15 +160,14 @@ export default {
             console.error('Error:', response.statusText)
           } else {
             console.log('Reservation submitted successfully')
+            setTimeout(() => {
+              this.isLoading = false
+              this.reservationConfirmedDialog = true
+            }, 2000)
           }
         } catch (error) {
           console.error('Error:', error)
         }
-
-        setTimeout(() => {
-          this.isLoading = false
-          this.reservationConfirmedDialog = true
-        }, 2000)
       }
     },
     backToMenu() {

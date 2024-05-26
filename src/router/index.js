@@ -23,7 +23,6 @@ import OrderTracker from '../components/order/OrderTracker.vue'
 
 // Reservation components
 import ReservationForm from '../components/reservation/ReservationForm.vue'
-import ReservationList from '../components/reservation/ReservationList.vue'
 
 // User components
 import UserProfile from '../components/user/UserProfile.vue'
@@ -46,7 +45,6 @@ const routes = [
   { path: '/checkout', component: CheckoutView },
   { path: '/orders', component: OrderTracker },
   { path: '/reservations/create', component: ReservationForm },
-  { path: '/reservations', component: ReservationList },
   { path: '/profile', component: UserProfile },
   { path: '/orders/history', component: OrderHistory },
   { path: '/dashboard/reservations', component: ReservationOverview },
