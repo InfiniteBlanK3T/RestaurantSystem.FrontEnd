@@ -143,7 +143,7 @@ export default {
     }
   },
   created() {
-    fetch('http://127.0.0.1:8000/api/sales-analytics/', {
+    fetch(`${process.env.VUE_APP_API_URL}sales-analytics/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`
       }

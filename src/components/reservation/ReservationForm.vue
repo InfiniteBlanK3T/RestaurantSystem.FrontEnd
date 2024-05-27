@@ -163,7 +163,7 @@ export default {
 
         this.isLoading = true
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/reservations/', {
+          const response = await fetch(`${process.env.VUE_APP_API_URL}reservations/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

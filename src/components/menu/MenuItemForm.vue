@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     saveMenuItem() {
-      const url = 'http://127.0.0.1:8000/api/menu-items/'
+      const url = `${process.env.VUE_APP_API_URL}menu-items/`
       const menuItem = this.menuItem
 
       fetch(url, {

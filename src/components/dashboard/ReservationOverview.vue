@@ -131,7 +131,7 @@ export default {
   async created() {
     const token = localStorage.getItem('access')
 
-    const response = await fetch('http://127.0.0.1:8000/api/reservations/', {
+    const response = await fetch(`${process.env.VUE_APP_API_URL}reservations/`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -139,7 +139,7 @@ export default {
     const data = await response.json()
 
     for (let reservation of data.results) {
-      const userResponse = await fetch(`http://127.0.0.1:8000/api/users/${reservation.user}`, {
+      const userResponse = await fetch(`${process.env.VUE_APP_API_URL}users/${reservation.user}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -207,7 +207,7 @@ export default {
         }
 
         const response = await fetch(
-          `http://127.0.0.1:8000/api/reservations/${this.editReservation.id}/`,
+          `${process.env.VUE_APP_API_URL}reservations/${this.editReservation.id}/`,
           {
             method: 'PATCH',
             headers: {
@@ -221,7 +221,7 @@ export default {
           const updatedReservation = await response.json()
 
           const userResponse = await fetch(
-            `http://127.0.0.1:8000/api/users/${updatedReservation.user}/`,
+            `${process.env.VUE_APP_API_URL}users/${updatedReservation.user}/`,
             {
               headers: {
                 Authorization: `Bearer ${token}`
@@ -245,7 +245,7 @@ export default {
     },
     async deleteReservation(reservation) {
       const token = localStorage.getItem('access')
-      const response = await fetch(`http://127.0.0.1:8000/api/reservations/${reservation.id}/`, {
+      const response = await fetch(`${process.env.VUE_APP_API_URL}reservations/${reservation.id}/`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`

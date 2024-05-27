@@ -130,7 +130,7 @@ export default {
           first_name: this.registerForm.firstName,
           last_name: this.registerForm.lastName
         }
-        fetch('http://127.0.0.1:8000/api/register/', {
+        fetch(`${process.env.VUE_APP_API_URL}register/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -27,7 +27,7 @@ export default {
     }
   },
   async created() {
-    const response = await fetch(`http://127.0.0.1:8000/api/menu-items/${this.$route.params.id}`)
+    const response = await fetch(`${process.env.VUE_APP_API_URL}menu-items/${this.$route.params.id}`)
     const data = await response.json()
     this.menuItem = data
   },
