@@ -139,7 +139,7 @@ export default {
         comment: this.description
       }
 
-      await fetch(`${process.env.VUE_APP_API_URL}feedbacks/`, {
+      await fetch(`${this.$apiUrl}feedbacks/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

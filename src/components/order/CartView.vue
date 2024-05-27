@@ -98,7 +98,7 @@ export default {
       this.multipleRestaurants = true
     } else if (restaurantIds.length > 0 && this.cartItems.length > 0) {
       try {
-        const response = await fetch(`${process.env.VUE_APP_API_URL}restaurants/${restaurantIds[0]}`)
+        const response = await fetch(`${this.$apiUrl}restaurants/${restaurantIds[0]}`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }

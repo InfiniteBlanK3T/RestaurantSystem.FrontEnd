@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import process from 'process'
 
 // Vuetify
 import 'vuetify/styles'
@@ -22,6 +23,8 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App)
+
+app.config.globalProperties.$apiUrl = this.$apiUrl;
 
 // Register the custom directive globally
 app.directive('pulse-on-hover', {

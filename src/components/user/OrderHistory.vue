@@ -56,7 +56,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await fetch(`${process.env.VUE_APP_API_URL}orders`, {
+      const response = await fetch(`${this.$apiUrl}orders`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`

@@ -50,7 +50,7 @@ export default {
     this.isLoggedIn = this.checkLoginStatus()
     if (this.isLoggedIn) {
       try {
-        const response = await fetch(`${process.env.VUE_APP_API_URL}users/`, {
+        const response = await fetch(`${this.$apiUrl}users/`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('access')}`

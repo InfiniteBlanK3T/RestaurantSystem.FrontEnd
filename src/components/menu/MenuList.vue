@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       menuItems: [],
-      nextPage: `${process.env.VUE_APP_API_URL}menu-items/`,
+      nextPage: `${this.$apiUrl}menu-items/`,
       restaurantName: '',
       currentPage: 1,
       itemsPerPage: 6,
@@ -90,7 +90,7 @@ export default {
     async fetchMenuItems() {
       try {
         const response = await fetch(
-          `${process.env.VUE_APP_API_URL}menu-items/?restaurant_name=${this.restaurantName}`
+          `${this.$apiUrl}menu-items/?restaurant_name=${this.restaurantName}`
         )
         const data = await response.json()
         this.menuItems = data.results
@@ -102,7 +102,7 @@ export default {
     onRestaurantNameChange() {
       this.menuItems = []
       this.currentPage = 1
-      this.nextPage = `${process.env.VUE_APP_API_URL}menu-items/?restaurant_name=${encodeURIComponent(this.restaurantName)}`
+      this.nextPage = `${this.$apiUrl}menu-items/?restaurant_name=${encodeURIComponent(this.restaurantName)}`
       this.$nextTick(() => {
         this.fetchMenuItems()
       })
@@ -115,7 +115,7 @@ export default {
     if (this.$route.params.id) {
       try {
         const response = await fetch(
-          `${process.env.VUE_APP_API_URL}menu-items/${this.$route.params.id}`
+          `${this.$apiUrl}menu-items/${this.$route.params.id}`
         )
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)

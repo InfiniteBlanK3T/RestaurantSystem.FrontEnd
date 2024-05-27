@@ -143,7 +143,7 @@ export default {
     }
   },
   created() {
-    fetch(`${process.env.VUE_APP_API_URL}sales-analytics/`, {
+    fetch(`${this.$apiUrl}sales-analytics/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`
       }
