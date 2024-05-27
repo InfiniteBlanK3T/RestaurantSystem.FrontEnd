@@ -151,7 +151,7 @@ export default {
       // Get the CSRF token from the cookie
       const csrfToken = this.getCookie('csrftoken')
 
-      fetch('http://localhost:8000/api/login/', {
+      fetch(`${process.env.VUE_APP_API_URL}login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

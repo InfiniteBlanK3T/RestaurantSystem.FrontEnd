@@ -139,7 +139,7 @@ export default {
         comment: this.description
       }
 
-      await fetch('http://localhost:8000/api/feedbacks/', {
+      await fetch(`${process.env.VUE_APP_API_URL}feedbacks/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
