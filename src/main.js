@@ -24,7 +24,7 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
-app.config.globalProperties.$apiUrl = this.$apiUrl;
+app.config.globalProperties.$apiUrl = process.env.VUE_APP_API_URL;
 
 // Register the custom directive globally
 app.directive('pulse-on-hover', {
