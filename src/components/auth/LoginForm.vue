@@ -1,47 +1,85 @@
 <template>
   <v-app>
     <v-main>
-      <v-container>
-        <v-row justify="center">
-          <v-col cols="12" sm="8" md="6">
-            <v-card>
-              <v-card-title>Login</v-card-title>
+      <v-container fluid fill-height>
+        <v-row justify="center" align="center">
+          <v-col cols="12" sm="8" md="6" lg="4">
+            <v-card elevation="4" rounded="lg">
+              <v-card-title class="text-h5 font-weight-bold">Login</v-card-title>
               <v-card-text>
                 <v-form @submit.prevent="login">
+                  <v-alert
+                    density="compact"
+                    text="Only ONE Staff/Admin Account is available for login. Customers can login using the demo accounts."
+                    title="-DEMO VERSION-"
+                    type="warning"
+                    border="top"
+                  ></v-alert>
                   <v-text-field
                     v-model="username"
                     label="Username"
-                    type="username"
-                    prepend-icon="mdi-account"
+                    prepend-inner-icon="mdi-account"
+                    outlined
+                    dense
                     required
                   ></v-text-field>
                   <v-text-field
                     v-model="password"
                     label="Password"
+                    prepend-inner-icon="mdi-lock"
+                    outlined
+                    dense
                     type="password"
-                    prepend-icon="mdi-lock"
                     required
                   ></v-text-field>
                   <v-row>
-                    <v-col cols="6">
-                      <v-btn @click="login" color="primary" block>Login</v-btn>
+                    <v-col cols="12" sm="6">
+                      <v-btn color="primary" block rounded type="submit" class="my-1">Login</v-btn>
                     </v-col>
-                    <v-col cols="6">
-                      <v-btn text router to="/register" color="primary" block>Register</v-btn>
-                    </v-col>
-                  </v-row>
-                  <v-divider></v-divider>
-                  <v-card-title>Demo Login</v-card-title>
-                  <v-row color="">
-                    <v-col cols="6">
-                      <v-btn @click="loginAsStaff" color="warning" block>Login as Staff</v-btn>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-btn @click="loginAsCustomer" color="warning" block
-                        >Login as Customer</v-btn
+                    <v-col cols="12" sm="6">
+                      <v-btn color="primary" router to="/register" block rounded class="my-1"
+                        >Register</v-btn
                       >
                     </v-col>
                   </v-row>
+                  <v-divider class="my-4"></v-divider>
+                  <div class="demo-login-container">
+                    <v-card-title class="text-h6 font-weight-bold mt-1 mb-1 demo-login-title"
+                      >Demo Login</v-card-title
+                    >
+                    <v-btn
+                      @click="loginAsStaff"
+                      color="warning"
+                      block
+                      rounded
+                      class="mb-2 demo-login-btn"
+                      >Prefill Staff Login</v-btn
+                    >
+                    <div class="demo-login-row">
+                      <v-col cols="12" md="6">
+                        <v-select
+                          :items="customers"
+                          item-text="title"
+                          item-value="value"
+                          v-model="selectedCustomer"
+                          label="Login as Customer"
+                          outlined
+                          dense
+                          @change="loginAsCustomer"
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12" md="6">
+                        <v-btn
+                          @click="loginAsCustomer"
+                          color="warning"
+                          block
+                          rounded
+                          class="demo-login-btn"
+                          >Prefill Customer Login</v-btn
+                        >
+                      </v-col>
+                    </div>
+                  </div>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -59,13 +97,46 @@ export default {
     return {
       username: '',
       password: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      selectedCustomer: null,
+      customers: [
+        {
+          title: 'Bob Adams',
+          value: { username: 'bob.adams', password: 'bob.adams@testing' }
+        },
+        {
+          title: 'Alice Brown',
+          value: { username: 'alice.brown', password: 'alice.brown01@testing' }
+        },
+        {
+          title: 'Charlie Davis',
+          value: { username: 'charlie.davis', password: '01@testing' }
+        },
+        {
+          title: 'David Evans',
+          value: { username: 'david.evans', password: '01@testing' }
+        },
+        {
+          title: 'Eve Green',
+          value: { username: 'eve.green', password: '01@testing' }
+        },
+        {
+          title: 'Frank Harris',
+          value: { username: 'frank.harris', password: '01@testing' }
+        },
+        {
+          title: 'Grace Ives',
+          value: { username: 'grace.ives', password: '01@testing' }
+        }
+      ]
     }
   },
   methods: {
     loginAsCustomer() {
-      this.username = 'customer'
-      this.password = 'customer01@testing'
+      if (this.selectedCustomer) {
+        this.username = this.selectedCustomer.username
+        this.password = this.selectedCustomer.password
+      }
     },
     loginAsStaff() {
       this.username = 'staff'
@@ -121,3 +192,28 @@ export default {
   }
 }
 </script>
+<style scoped>
+.demo-login-container {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.demo-login-title {
+  color: #333;
+}
+
+.demo-login-btn {
+  text-transform: none;
+}
+
+.demo-login-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -8px;
+}
+
+.demo-login-row > * {
+  padding: 8px;
+}
+</style>

@@ -6,6 +6,12 @@
           <v-card-title class="text-h5 font-weight-bold mb-4">Make a Reservation</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="isFormValid" lazy-validation>
+              <v-alert
+                density="compact"
+                text="No restrictive input validation. Please handle with care! :)"
+                title="-DEMO VERSION-"
+                type="warning"
+              ></v-alert>
               <v-col cols="12">
                 <p v-if="!restaurantName" class="p-3 mb-2 bg-info text-white">
                   Please select your Restaurant!
@@ -14,6 +20,7 @@
                   :items="restaurants"
                   label="Select a restaurant"
                   v-model="restaurantName"
+                  prepend-icon="mdi-store"
                 ></v-select>
               </v-col>
               <v-row>
@@ -24,6 +31,7 @@
                     outlined
                     dense
                     :rules="dateRules"
+                    prepend-icon="mdi-calendar"
                     required
                   ></v-text-field>
                 </v-col>
@@ -35,6 +43,7 @@
                     dense
                     type="time"
                     :rules="timeRules"
+                    prepend-icon="mdi-clock-time-four-outline"
                     required
                   ></v-text-field>
                 </v-col>
@@ -48,6 +57,7 @@
                     dense
                     type="number"
                     :rules="seatsRules"
+                    prepend-icon="mdi-chair-rolling"
                     required
                   ></v-text-field>
                 </v-col>
@@ -60,6 +70,7 @@
                     outlined
                     dense
                     rows="2"
+                    prepend-icon="mdi-message-text"
                   ></v-textarea>
                 </v-col>
               </v-row>
@@ -164,7 +175,6 @@ export default {
           if (!response.ok) {
             console.error('Error:', response.statusText)
           } else {
-            console.log('Reservation submitted successfully')
             setTimeout(() => {
               this.isLoading = false
               this.reservationConfirmedDialog = true

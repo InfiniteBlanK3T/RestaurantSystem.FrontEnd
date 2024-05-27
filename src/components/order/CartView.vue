@@ -112,15 +112,22 @@ export default {
   },
   methods: {
     incrementQuantity(index) {
-      this.$emit('updateCartItem', index, this.cartItems[index].quantity + 1)
+      this.cartItems = this.cartItems.map((item, i) =>
+        i === index ? { ...item, quantity: item.quantity + 1 } : item
+      )
+      this.$emit('updateCartItem', this.cartItems)
     },
     decrementQuantity(index) {
       if (this.cartItems[index].quantity > 1) {
-        this.$emit('updateCartItem', index, this.cartItems[index].quantity - 1)
+        this.cartItems = this.cartItems.map((item, i) =>
+          i === index ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        this.$emit('updateCartItem', this.cartItems)
       }
     },
     removeFromCart(index) {
-      this.$emit('removeFromCart', index)
+      this.cartItems = this.cartItems.filter((item, i) => i !== index)
+      this.$emit('removeFromCart', this.cartItems)
     },
     checkout() {
       this.$router.push('/checkout')

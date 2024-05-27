@@ -8,8 +8,8 @@
             <v-form>
               <v-alert
                 density="compact"
-                text="RESTRICTED TO JUST RELAXING KOALA - BRANCH 4!"
-                title="--DEMO VERSION--"
+                text="Restricted to just 1 restaurant (Relaxing Koala - Branch 4) for demo purposes."
+                title="-DEMO VERSION-"
                 type="info"
                 variant="tonal"
               ></v-alert>
@@ -40,8 +40,8 @@
               ></v-text-field>
               <v-alert
                 density="compact"
-                text="ONLY ACCEPTING URL OF IMAGES!"
-                title="Warning -- DEMO VERSION --"
+                text="Only URLs are allowed for demo purposes."
+                title="-DEMO VERSION-"
                 type="warning"
                 ><a
                   href="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1299&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

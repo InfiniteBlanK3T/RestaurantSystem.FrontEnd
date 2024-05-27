@@ -57,6 +57,12 @@
       </v-col>
       <v-col cols="12" md="5">
         <v-card v-hover-highlight class="elevation-4 rounded-lg">
+          <v-alert
+            density="compact"
+            text="Graphical representation of sales by month - DEMO DATA."
+            title="-DEMO VERSION-"
+            type="warning"
+          ></v-alert>
           <v-card-title class="text-h6 font-weight-bold">Sales by Month</v-card-title>
           <v-card-text>
             <line-chart :data="chartData" :options="salesByMonthOptions" />
@@ -145,7 +151,7 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.totalRevenue = data.total_revenue
-        this.ordersPlaced = data.orders_placed
+        this.ordersPlaced = data.number_of_orders
         this.averageOrderValue = data.average_order_value
         this.popularMenuItems = data.popular_menu_items
       })

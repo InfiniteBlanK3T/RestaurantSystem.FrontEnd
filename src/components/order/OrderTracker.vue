@@ -7,7 +7,7 @@
           <v-alert
             density="compact"
             text="Just a mock process of order status. No real-time data."
-            title="Warning -- DEMO VERSION --"
+            title="-DEMO VERSION-"
             type="warning"
           ></v-alert>
           <v-card-text>
@@ -152,7 +152,7 @@ export default {
       this.rating = 0
       this.description = ''
       this.showFeedbackDialog = false
-      this.$router.push('/menu')
+      this.$router.push('/menu').then(() => window.location.reload())
     }
   }
 }

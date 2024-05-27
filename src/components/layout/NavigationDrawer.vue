@@ -61,7 +61,7 @@
       <router-link v-if="userRole === 'staff'" link to="/dashboard/reservations" class="nav-link">
         <v-list-item link>
           <v-icon class="mr-2 nav-icon">bi-calendar</v-icon>
-          <v-list-item-title>Reservations</v-list-item-title>
+          <v-list-item-title>Reservations Data</v-list-item-title>
         </v-list-item>
       </router-link>
       <router-link v-if="userRole === 'staff'" to="/menu/create" class="nav-link">

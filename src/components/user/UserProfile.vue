@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="10">
         <v-card class="elevation-4">
           <v-card-title class="text-h5 font-weight-bold mb-4">User Profile</v-card-title>
           <v-card-text>
             <v-alert
               density="compact"
               text="This feature not supports yet - Just DEMO DATA**"
-              title="Warning -- DEMO VERSION"
+              title="-DEMO VERSION-"
               type="warning"
             ></v-alert>
             <br />
@@ -33,6 +33,7 @@
                   label="Name"
                   outlined
                   dense
+                  prepend-icon="mdi-account"
                   required
                 ></v-text-field>
                 <v-text-field
@@ -40,6 +41,7 @@
                   label="Email"
                   outlined
                   dense
+                  prepend-icon="mdi-email"
                   required
                 ></v-text-field>
                 <v-text-field
@@ -47,6 +49,7 @@
                   label="Phone"
                   outlined
                   dense
+                  prepend-icon="mdi-phone"
                   required
                 ></v-text-field>
                 <v-text-field
@@ -54,6 +57,7 @@
                   label="Address"
                   outlined
                   dense
+                  prepend-icon="mdi-map-marker"
                   required
                 ></v-text-field>
               </v-col>
@@ -93,9 +97,7 @@ export default {
   },
   methods: {
     updateProfile() {
-      // Implement the logic to update the user profile
-      console.log('Updated user profile:', this.userProfile)
-      console.log('Updated profile picture:', this.profilePicture)
+      alert('Profile updated successfully! - DEMO VERSION - No API Call')
     }
   }
 }

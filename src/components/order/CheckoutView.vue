@@ -12,17 +12,34 @@
             <h3>Customer Information</h3>
             <v-form href="customerForm">
               <!-- Customer Information Form Fields -->
-              <v-text-field v-model="order.full_name" label="Full Name" outlined></v-text-field>
-              <v-text-field v-model="order.address" label="Address" outlined></v-text-field>
-              <v-text-field v-model="order.city" label="City" outlined></v-text-field>
+              <v-text-field
+                v-model="order.full_name"
+                label="Full Name"
+                prepend-icon="mdi-account"
+                outlined
+              ></v-text-field>
+              <v-text-field
+                v-model="order.address"
+                label="Address"
+                prepend-icon="mdi-map-marker"
+                outlined
+              ></v-text-field>
+              <v-text-field
+                v-model="order.city"
+                label="City"
+                prepend-icon="mdi-city"
+                outlined
+              ></v-text-field>
               <v-text-field
                 v-model="order.state_province"
                 label="State/Province"
+                prepend-icon="mdi-domain"
                 outlined
               ></v-text-field>
               <v-text-field
                 v-model="order.zip_postal_code"
                 label="Zip/Postal Code"
+                prepend-icon="mdi-zip-box"
                 outlined
               ></v-text-field>
             </v-form>
@@ -36,13 +53,24 @@
             <v-card-title>Payment Information</v-card-title>
             <v-form ref="paymentForm">
               <!-- Payment Information Form Fields -->
-              <v-text-field v-model="card_number" label="Card Number" outlined></v-text-field>
+              <v-text-field
+                v-model="card_number"
+                label="Card Number"
+                prepend-icon="mdi-credit-card"
+                outlined
+              ></v-text-field>
               <v-text-field
                 v-model="card_expiration"
                 label="Expiration Date"
+                prepend-icon="mdi-calendar"
                 outlined
               ></v-text-field>
-              <v-text-field v-model="card_cvv" label="CVV" outlined></v-text-field>
+              <v-text-field
+                v-model="card_cvv"
+                prepend-icon="mdi-lock"
+                label="CVV"
+                outlined
+              ></v-text-field>
             </v-form>
             <v-card-actions>
               <v-btn color="primary" @click="step = 1">Previous</v-btn>
@@ -84,7 +112,7 @@
                 <h3 class="font-weight-bold">Total:</h3>
               </v-col>
               <v-col cols="6" class="text-right">
-                <h3 class="font-weight-bold">${{ total }}</h3>
+                <h3 class="font-weight-bold">${{ total.toFixed(2) }}</h3>
               </v-col>
             </v-row>
             <v-card-actions>
@@ -93,6 +121,7 @@
               <v-btn variant="elevated" color="primary" @click="placeOrder">Place Order</v-btn>
             </v-card-actions>
           </template>
+          <v-divider></v-divider>
           <v-card-actions>
             <v-btn @click="autoFill" class="btn btn-warning" block>Demo Autofill for me!</v-btn>
           </v-card-actions>

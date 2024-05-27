@@ -6,12 +6,28 @@
           <v-card-title class="text-h5 font-weight-bold mb-4">Register</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="isFormValid" lazy-validation>
+              <v-alert
+                density="compact"
+                text="User can only register as a customer. Staff registration is not allowed."
+                title="-DEMO VERSION-"
+                type="warning"
+              ></v-alert>
+              <v-text-field
+                v-model="registerForm.username"
+                label="User Name"
+                outlined
+                dense
+                :rules="usernameRules"
+                prepend-icon="mdi-account"
+                required
+              ></v-text-field>
               <v-text-field
                 v-model="registerForm.firstName"
                 label="First Name"
                 outlined
                 dense
                 :rules="nameRules"
+                prepend-icon=""
                 required
               ></v-text-field>
               <v-text-field
@@ -20,22 +36,17 @@
                 outlined
                 dense
                 :rules="nameRules"
+                prepend-icon=""
                 required
               ></v-text-field>
-              <v-text-field
-                v-model="registerForm.username"
-                label="User Name"
-                outlined
-                dense
-                :rules="usernameRules"
-                required
-              ></v-text-field>
+
               <v-text-field
                 v-model="registerForm.email"
                 label="Email"
                 outlined
                 dense
                 :rules="emailRules"
+                prepend-icon="mdi-email"
                 required
               ></v-text-field>
               <v-text-field
@@ -44,6 +55,7 @@
                 outlined
                 dense
                 :rules="passwordRules"
+                prepend-icon="mdi-lock"
                 required
                 type="password"
               ></v-text-field>
@@ -53,6 +65,7 @@
                 outlined
                 dense
                 :rules="confirmPasswordRules"
+                prepend-icon="mdi-lock"
                 required
                 type="password"
               ></v-text-field>
@@ -60,7 +73,9 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="register" :disabled="!isFormValid">Register</v-btn>
+            <v-btn color="primary" @click="register" variant="flat" block :disabled="!isFormValid"
+              >Register</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>

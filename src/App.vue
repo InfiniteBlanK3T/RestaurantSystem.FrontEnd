@@ -21,18 +21,21 @@
         @login="handleLogin"
       />
     </v-main>
+    <AppFooter />
   </v-app>
 </template>
 
 <script>
 import AppBar from './components/layout/Appbar.vue'
 import NavigationDrawer from './components/layout/NavigationDrawer.vue'
+import AppFooter from './components/layout/AppFooter.vue'
 
 export default {
   name: 'App',
   components: {
     AppBar,
-    NavigationDrawer
+    NavigationDrawer,
+    AppFooter
   },
   data() {
     return {
@@ -81,6 +84,7 @@ export default {
       localStorage.removeItem('access')
       localStorage.removeItem('refresh')
       localStorage.removeItem('username')
+      localStorage.removeItem('cartItems')
     },
     toggleDrawer() {
       this.isDrawerOpen = !this.isDrawerOpen
@@ -101,13 +105,12 @@ export default {
 
       this.cartItems = cartItems
     },
-    updateCartItem(index, quantity) {
-      this.cartItems[index].quantity = quantity
+    updateCartItem(newCartItems) {
+      this.cartItems = [...newCartItems]
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
     },
-    removeFromCart(index) {
-      this.cartItems.splice(index, 1)
-
+    removeFromCart(newCartItems) {
+      this.cartItems = [...newCartItems]
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
     }
   }

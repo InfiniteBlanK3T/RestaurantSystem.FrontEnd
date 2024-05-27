@@ -18,9 +18,9 @@
         <v-alert
           v-if="restaurantName === 'Relaxing Koala - Branch 4'"
           density="compact"
-          text="Relaxing Koala - Branch 4 is Demo Testing environment - Adding new MenuItem to Restaurant"
+          text="Relaxing Koala - Branch 4 is Demo Testing environment - Adding new MenuItem to Restaurant by Admin account. Please DO NOT ORDER from here!"
           title="Warning"
-          type="warning"
+          type="error"
         ></v-alert>
         <br />
         <v-btn @click="onRestaurantNameChange">Search</v-btn>
@@ -35,7 +35,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <router-link :to="`/menu/${item.id}`">
-              <v-btn color="primary" text v-pulse-on-hover block variant="flat">View Details</v-btn>
+              <v-btn color="primary" v-pulse-on-hover variant="flat">View Details</v-btn>
             </router-link>
           </v-card-actions>
         </v-card>
