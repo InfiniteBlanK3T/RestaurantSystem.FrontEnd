@@ -87,7 +87,18 @@
             >
               Submit Reservation
             </v-btn>
+
           </v-card-actions>
+        <v-card-actions>
+          <v-btn
+            color="warning"
+            @click="fillRandomData"
+            variant="flat"
+            block
+          >
+            Fill with Random Data
+          </v-btn>
+        </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -174,6 +185,7 @@ export default {
 
           if (!response.ok) {
             console.error('Error:', response.statusText)
+            alert('Bad request. Please try again later.')
           } else {
             setTimeout(() => {
               this.isLoading = false
@@ -182,8 +194,21 @@ export default {
           }
         } catch (error) {
           console.error('Error:', error)
+          alert('Bad request. Please try again later.')
         }
       }
+    },
+    fillRandomData() {
+      const randomRestaurantIndex = Math.floor(Math.random() * this.restaurants.length);
+      const randomDate = new Date();
+      randomDate.setDate(randomDate.getDate() + Math.floor(Math.random() * 148) + 1);
+      const randomTime = `${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60)}`.padStart(5, '0');
+      const randomSeats = Math.floor(Math.random() * 10) + 1;
+
+      this.restaurantName = this.restaurants[randomRestaurantIndex];
+      this.reservation.date = randomDate.toISOString().split('T')[0];
+      this.reservation.time = randomTime;
+      this.reservation.numberOfSeats = randomSeats;
     },
     backToMenu() {
       this.$router.push('/')

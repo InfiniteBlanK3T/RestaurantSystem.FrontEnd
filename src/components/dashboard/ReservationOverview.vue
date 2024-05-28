@@ -129,9 +129,11 @@ export default {
     }
   },
   async created() {
-    const token = localStorage.getItem('access')
+  const token = localStorage.getItem('access')
+  let nextPageUrl = `${this.$apiUrl}reservations/`
 
-    const response = await fetch(`${this.$apiUrl}reservations/`, {
+  while (nextPageUrl) {
+    const response = await fetch(nextPageUrl, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -155,7 +157,10 @@ export default {
         party_size: reservation.party_size
       })
     }
-  },
+
+    nextPageUrl = data.next
+  }
+},
   computed: {
     todayReservations() {
       const today = new Date().toISOString().slice(0, 10)

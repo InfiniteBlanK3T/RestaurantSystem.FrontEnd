@@ -122,7 +122,7 @@ export default {
         currentStatus++
 
         if (currentStatus <= totalStatuses) {
-          setTimeout(animateStatus, 3000)
+          setTimeout(animateStatus, 1500)
         } else {
           this.showFeedbackDialog = true
         }

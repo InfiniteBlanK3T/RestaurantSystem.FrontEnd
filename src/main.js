@@ -24,9 +24,10 @@ const vuetify = createVuetify({
 const app = createApp(App)
 
 // Please change VITE_APP_ENV status in .env here if running DEV ENV
-if (import.meta.env.VITE_APP_ENV === 'production') {
+if (import.meta.env.VITE_APP_ENV === 'PROD') {
   app.config.globalProperties.$apiUrl = import.meta.env.VITE_APP_API_URL_PROD;
 } else {
+  console.log('------------Running in DEV ENV------------')
   app.config.globalProperties.$apiUrl = import.meta.env.VITE_APP_API_URL_DEV;
 }
 
