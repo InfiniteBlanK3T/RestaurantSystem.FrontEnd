@@ -30,7 +30,8 @@ import OrderHistory from '../components/user/OrderHistory.vue'
 
 // // Dashboard components
 import ReservationOverview from '../components/dashboard/ReservationOverview.vue'
-import OrderManagement from '../components/dashboard/OrderManagement.vue'
+// Not yet implemented
+// import OrderManagement from '../components/dashboard/OrderManagement.vue'
 import SalesAnalytics from '../components/dashboard/SalesAnalytics.vue'
 
 const routes = [
@@ -48,7 +49,7 @@ const routes = [
   { path: '/profile', component: UserProfile },
   { path: '/orders/history', component: OrderHistory },
   { path: '/dashboard/reservations', component: ReservationOverview },
-  { path: '/dashboard/orders', component: OrderManagement },
+// { path: '/dashboard/orders', component: OrderManagement },
   { path: '/dashboard/analytics', component: SalesAnalytics },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]

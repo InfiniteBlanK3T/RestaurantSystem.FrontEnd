@@ -95,8 +95,8 @@ export default {
           }
           return response.json()
         })
-        .then((data) => {
-          console.log('Menu item saved:', data)
+        .then(() => {
+          // console.log('Menu item saved:', data)
           this.$router.push('/menu')
         })
         .catch((error) => {

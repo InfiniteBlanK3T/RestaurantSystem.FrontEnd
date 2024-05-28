@@ -23,13 +23,14 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
+// Please change VITE_APP_ENV status in .env here if running DEV ENV
 if (import.meta.env.VITE_APP_ENV === 'production') {
   app.config.globalProperties.$apiUrl = import.meta.env.VITE_APP_API_URL_PROD;
 } else {
   app.config.globalProperties.$apiUrl = import.meta.env.VITE_APP_API_URL_DEV;
 }
 
-console.log(`Test at main${app.config.globalProperties.$apiUrl}`);
+// console.log(`Test at main${app.config.globalProperties.$apiUrl}`);
 
 // Register the custom directive globally
 app.directive('pulse-on-hover', {

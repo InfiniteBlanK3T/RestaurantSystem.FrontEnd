@@ -179,15 +179,15 @@ export default {
     },
     viewOrders(type) {
       // Implement the logic to view orders of the specified type
-      console.log(`View ${type} orders`)
+      // console.log(`View ${type} orders`)
     },
     viewOrderDetails(order) {
       // Implement the logic to view order details
-      console.log('View order details:', order)
+      // console.log('View order details:', order)
     },
     updateOrderStatus(order, newStatus) {
       // Implement the logic to update the order status
-      console.log('Update order status:', order, newStatus)
+      // console.log('Update order status:', order, newStatus)
     },
     getStatusColor(status) {
       switch (status) {

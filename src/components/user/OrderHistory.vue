@@ -19,7 +19,7 @@
                 <span>${{ item.total.toFixed(2) }}</span>
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="viewOrderDetails(item)"> mdi-eye </v-icon>
+                <v-icon small class="mr-2" @click="viewOrderDetails()"> mdi-eye </v-icon>
               </template>
             </v-data-table>
           </v-card-text>
@@ -50,8 +50,8 @@ export default {
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
       return date.toLocaleDateString('en-US', options)
     },
-    viewOrderDetails(order) {
-      console.log('View order details:', order)
+    viewOrderDetails() {
+      alert('This feature not support yet')
     }
   },
   async mounted() {
