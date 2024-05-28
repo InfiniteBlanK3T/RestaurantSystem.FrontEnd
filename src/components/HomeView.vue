@@ -8,8 +8,15 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" md="8" offset-md="2">
+          <v-col cols="12" md="9" offset-md="2">
             <v-card elevation="4" rounded="lg">
+              <v-alert
+                density="compact"
+                text="Ephemeral File system means that changes to the file system won't PERSIST!"
+                title="Warning - Demo Project"
+                type="warning"
+                class="mb-4"
+              ></v-alert>
               <v-img
                 src="https://img.freepik.com/free-photo/photorealistic-wooden-house-interior-with-timber-decor-furnishings\_23-2151263549.jpg?t=st=1716180166~exp=1716183766~hmac=1d0cf1f59fe787f44540046638c1ad5067785bf8e52be037a37bb7d069fbe794&w=996"
                 height="400"
@@ -17,14 +24,15 @@
                 class="rounded-top"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">About This Web App Project</v-card-title>
-              <v-card-subtitle class="text font-weigh-italic"> Started date: 18th May 2024</v-card-subtitle>
+              <v-card-subtitle class="text font-weight-italic"> Started date: 18th May 2024</v-card-subtitle>
               <v-card-text class="text-body-1">
-                This Restaurant Information System was built as a Demo Project -  Full Stack. <br/>
-                With Django as Backend and Vue.JS as Frontend and SQLite as a Database. Shipping with Docker container and CI/ CD. <br/>
+                This Restaurant Information System was built as a Demo Project - Full Stack. <br/>
+                With Django as Backend and Vue.JS as Frontend with SQLite Database for storage.<br/>
                 The website is a simple restaurant system where you can add, edit, delete, and view menu items. 
                 Some of the features are limited for Demo Purposes however I will implement more later on. <br/>
               </v-card-text>
             </v-card>
+
           </v-col>
         </v-row>
       </v-container>
