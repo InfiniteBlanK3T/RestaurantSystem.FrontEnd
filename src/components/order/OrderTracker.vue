@@ -152,7 +152,7 @@ export default {
       this.rating = 0
       this.description = ''
       this.showFeedbackDialog = false
-      this.$router.push('/menu').then(() => window.location.reload())
+      this.$router.push('/').then(() => window.location.reload())
     }
   }
 }
