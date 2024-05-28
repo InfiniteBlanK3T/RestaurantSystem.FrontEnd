@@ -129,36 +129,35 @@ export default {
     }
   },
   async created() {
-  const token = localStorage.getItem('access')
-  let nextPageUrl = `${this.$apiUrl}reservations/`
+    const token = localStorage.getItem('access')
+    let nextPageUrl = `${this.$apiUrl}reservations/`
 
-  while (nextPageUrl) {
-    const response = await fetch(nextPageUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    const data = await response.json()
-
-    for (let reservation of data.results) {
-      const userResponse = await fetch(`${this.$apiUrl}users/${reservation.user}`, {
+    while (nextPageUrl) {
+      const response = await fetch(nextPageUrl, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      const userData = await userResponse.json()
+      const data = await response.json()
 
-      this.reservations.push({
-        id: reservation.id,
-        user: `${userData.first_name} ${userData.last_name}`,
-        restaurant: reservation.restaurant,
-        date: reservation.date,
-        time: reservation.time.substring(0, 5),
-        party_size: reservation.party_size
-      })
-    }
+      for (let reservation of data.results) {
+        const userResponse = await fetch(`${this.$apiUrl}users/${reservation.user}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        const userData = await userResponse.json()
 
-    nextPageUrl = data.next
+        this.reservations.push({
+          id: reservation.id,
+          user: `${userData.first_name} ${userData.last_name}`,
+          restaurant: reservation.restaurant,
+          date: reservation.date,
+          time: reservation.time.substring(0, 5),
+          party_size: reservation.party_size
+        })
+      }
+      nextPageUrl = data.next.replace('http://', 'https://');
   }
 },
   computed: {
