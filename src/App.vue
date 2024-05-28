@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      isDrawerOpen: true,
+      isDrawerOpen: false,
       isLoggedIn: false,
       cartItems: [],
       username: localStorage.getItem('username') || '',

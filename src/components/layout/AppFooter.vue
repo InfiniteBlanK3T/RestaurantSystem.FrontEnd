@@ -10,6 +10,7 @@
           <h4 class="font-weight-bold mb-3">Connect with Us</h4>
           <div class="d-flex justify-center">
             <v-btn
+              disabled
               v-for="link in socialLinks"
               :key="link.name"
               :href="link.url"
@@ -49,7 +50,7 @@
       <v-divider></v-divider>
       <v-row justify="center" class="py-2">
         <v-col cols="12" class="text-center">
-          <p class="mb-0">Made with by BlanK3T - THOMAS</p>
+          <p class="mb-0">Made by BlanK3T - THOMAS</p>
         </v-col>
       </v-row>
     </v-container>
@@ -61,9 +62,9 @@ export default {
   data() {
     return {
       socialLinks: [
-        { name: 'Facebook', icon: 'mdi-facebook', url: 'https://www.facebook.com/your-page' },
-        { name: 'Twitter', icon: 'mdi-twitter', url: 'https://twitter.com/your-handle' },
-        { name: 'Instagram', icon: 'mdi-instagram', url: 'https://www.instagram.com/your-page' }
+        { name: 'Facebook', icon: 'mdi-facebook', url: '#' },
+        { name: 'Twitter', icon: 'mdi-twitter', url: '#' },
+        { name: 'Instagram', icon: 'mdi-instagram', url: '#' }
       ]
     }
   }

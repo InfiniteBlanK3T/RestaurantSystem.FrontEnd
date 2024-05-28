@@ -2,7 +2,7 @@
   <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="$emit('toggleDrawer')"></v-app-bar-nav-icon>
     <img sizes="8" src="./icons8-whale-94.png" alt="Logo" />
-    <v-toolbar-title>Restaurant Information System</v-toolbar-title>
+    <v-toolbar-title cols="12" sm="8" class="d-none d-sm-block">Restaurant Information System</v-toolbar-title>
 
     <v-spacer></v-spacer>
     <span v-if="isLoggedIn">Welcome, {{ username }}!</span>
@@ -38,3 +38,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media (max-width: 767px) {
+  .d-none {
+    display: none !important;
+  }
+}
+</style>

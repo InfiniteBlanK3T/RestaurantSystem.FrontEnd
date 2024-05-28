@@ -149,7 +149,8 @@ export default {
       }
 
       // Get the CSRF token from the cookie
-      const csrfToken = this.getCookie('csrftoken')
+      const csrfToken = this.getCookie('csrftoken');
+
 
       fetch(`${this.$apiUrl}login/`, {
         method: 'POST',

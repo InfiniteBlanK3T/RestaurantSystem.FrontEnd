@@ -4,25 +4,21 @@
       <v-container>
         <v-row>
           <v-col cols="12">
-            <h1 class="text-center">Welcome to Relaxing Koala</h1>
+            <h1 class="text-center display-3 mb-8">Welcome to Relaxing Koala</h1>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12">
-            <v-card>
+          <v-col cols="12" md="8" offset-md="2">
+            <v-card elevation="4" rounded="lg">
               <v-img
-                src="https://img.freepik.com/free-photo/photorealistic-wooden-house-interior-with-timber-decor-furnishings_23-2151263549.jpg?t=st=1716180166~exp=1716183766~hmac=1d0cf1f59fe787f44540046638c1ad5067785bf8e52be037a37bb7d069fbe794&w=996"
+                src="https://img.freepik.com/free-photo/photorealistic-wooden-house-interior-with-timber-decor-furnishings\_23-2151263549.jpg?t=st=1716180166~exp=1716183766~hmac=1d0cf1f59fe787f44540046638c1ad5067785bf8e52be037a37bb7d069fbe794&w=996"
                 height="400"
+                cover
+                class="rounded-top"
               ></v-img>
-              <v-card-title>About Us</v-card-title>
-              <v-card-text>
-                Indulge in culinary bliss with our diverse menu featuring signature dishes like the
-                Classic Cheeseburger, Spaghetti Bolognese, and Margherita Pizza. From comforting
-                classics to exotic delights, every bite is a journey of flavor. Our inviting
-                ambiance and attentive staff ensure a dining experience like no other. Whether it's
-                a casual lunch or special celebration, Relaxing Koala promises to exceed your
-                expectations. Join us and let the flavors of Relaxing Koala transport you to a world
-                of culinary delight.
+              <v-card-title class="text-h5 font-weight-bold">About Us</v-card-title>
+              <v-card-text class="text-body-1">
+                Indulge in culinary bliss with our diverse menu featuring signature dishes like the Classic Cheeseburger, Spaghetti Bolognese, and Margherita Pizza. From comforting classics to exotic delights, every bite is a journey of flavor. Our inviting ambiance and attentive staff ensure a dining experience like no other. Whether it's a casual lunch or special celebration, Relaxing Koala promises to exceed your expectations. Join us and let the flavors of Relaxing Koala transport you to a world of culinary delight.
               </v-card-text>
             </v-card>
           </v-col>
@@ -34,6 +30,13 @@
 
 <script>
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
 }
 </script>
+
+<style scoped>
+.home {
+  background-color: #f5f5f5;
+  padding: 40px 0;
+}
+</style>
