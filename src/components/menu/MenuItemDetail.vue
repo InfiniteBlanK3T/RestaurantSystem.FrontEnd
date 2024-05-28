@@ -20,25 +20,23 @@
         <p class="text-h6 mb-6">Price: ${{ menuItem.price }}</p>
         <div class="d-flex justify-space-between">
           <v-btn
-          v-if="isLoggedIn && userRole === 'customer'"
-          color="primary"
-          @click="addToCart(menuItem)"
-          class="text-capitalize mr-4"
-        >Add to Cart</v-btn>
-        
-        <v-btn
-          v-else-if="!isLoggedIn"
-          color="secondary"
-          to="/login"
-          class="text-capitalize"
-        >Login to Add to Cart</v-btn>
-        
-        <v-btn
-          v-else
-          color="warning"
-          class="text-capitalize"
-          readonly
-        >You must be a customer to place an order</v-btn>
+            v-if="!isLoggedIn"
+            color="secondary"
+            to="/login"
+            class="text-capitalize"
+          >Please sign up or login to Add to Cart!</v-btn>
+          <v-btn
+            v-if="isLoggedIn && userRole === 'staff'"
+            color="warning"
+            class="text-capitalize"
+            readonly
+          >You must be a customer to place an Order</v-btn>
+          <v-btn
+            v-else
+            color="primary"
+            @click="addToCart(menuItem)"
+            class="text-capitalize mr-4"
+          >Add to Cart</v-btn>     
         </div>
       </v-col>
     </v-row>
