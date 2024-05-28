@@ -26,7 +26,7 @@
             class="text-capitalize"
           >Please sign up or login to Add to Cart!</v-btn>
           <v-btn
-            v-if="isLoggedIn && userRole === 'staff'"
+            v-else-if="isLoggedIn && userRole === 'staff'"
             color="warning"
             class="text-capitalize"
             readonly

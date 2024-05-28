@@ -20,7 +20,7 @@
       <router-link to="/menu" class="nav-link">
         <v-list-item link>
 
-            <v-icon>mdi-menu</v-icon>
+            <v-icon>mdi-food-fork-drink</v-icon>
 
           <v-list-item-title class="d-none d-md-block">Menu</v-list-item-title>
         </v-list-item>

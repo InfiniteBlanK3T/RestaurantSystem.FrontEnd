@@ -16,9 +16,13 @@
                 cover
                 class="rounded-top"
               ></v-img>
-              <v-card-title class="text-h5 font-weight-bold">About Us</v-card-title>
+              <v-card-title class="text-h5 font-weight-bold">About This Web App Project</v-card-title>
+              <v-card-subtitle class="text font-weigh-italic"> Started date: 18th May 2024</v-card-subtitle>
               <v-card-text class="text-body-1">
-                Indulge in culinary bliss with our diverse menu featuring signature dishes like the Classic Cheeseburger, Spaghetti Bolognese, and Margherita Pizza. From comforting classics to exotic delights, every bite is a journey of flavor. Our inviting ambiance and attentive staff ensure a dining experience like no other. Whether it's a casual lunch or special celebration, Relaxing Koala promises to exceed your expectations. Join us and let the flavors of Relaxing Koala transport you to a world of culinary delight.
+                This Restaurant Information System was built as a Demo Project -  Full Stack. <br/>
+                With Django as Backend and Vue.JS as Frontend and SQLite as a Database. Shipping with Docker container and CI/ CD. <br/>
+                The website is a simple restaurant system where you can add, edit, delete, and view menu items. 
+                Some of the features are limited for Demo Purposes however I will implement more later on. <br/>
               </v-card-text>
             </v-card>
           </v-col>

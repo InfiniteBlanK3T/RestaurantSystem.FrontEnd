@@ -28,7 +28,7 @@
           <h4 class="font-weight-bold mb-3">More Links</h4>
           <div>
             <v-btn
-              href="https://github.com/InfiniteBlanK3T"
+              href="https://www.linkedin.com/in/thomas-vo-ba4aa3289/"              
               target="_blank"
               text
               color="white"
@@ -37,7 +37,7 @@
               LinkedIn
             </v-btn>
             <v-btn
-              href="https://www.linkedin.com/in/thomas-vo-ba4aa3289/"
+              href="https://github.com/InfiniteBlanK3T"
               target="_blank"
               text
               color="white"
