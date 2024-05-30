@@ -17,30 +17,47 @@
                 label="Full Name"
                 prepend-icon="mdi-account"
                 outlined
+                :rules="[
+                  (v) => !!v || 'Full Name is required',
+                  (v) => /^[a-zA-Z\s]+$/.test(v) || 'Full Name must only contain letters and spaces',
+                ]"
               ></v-text-field>
               <v-text-field
                 v-model="order.address"
                 label="Address"
                 prepend-icon="mdi-map-marker"
                 outlined
+                :rules="[(v) => !!v || 'Address is required']"
               ></v-text-field>
               <v-text-field
                 v-model="order.city"
                 label="City"
                 prepend-icon="mdi-city"
                 outlined
+                :rules="[
+                  (v) => !!v || 'City is required',
+                  (v) => /^[a-zA-Z\s]+$/.test(v) || 'City must only contain letters and spaces',
+                ]"
               ></v-text-field>
               <v-text-field
                 v-model="order.state_province"
                 label="State/Province"
                 prepend-icon="mdi-domain"
                 outlined
+                :rules="[
+                  (v) => !!v || 'State/Province is required',
+                  (v) => /^[a-zA-Z\s]+$/.test(v) || 'State/Province must only contain letters and spaces',
+                ]"
               ></v-text-field>
               <v-text-field
                 v-model="order.zip_postal_code"
                 label="Zip/Postal Code"
                 prepend-icon="mdi-zip-box"
                 outlined
+                :rules="[
+                  (v) => !!v || 'Zip/Postal Code is required',
+                  (v) => /^\d{5}(?:[-\s]\d{4})?$/.test(v) || 'Invalid Zip/Postal Code format',
+                ]"
               ></v-text-field>
             </v-form>
             <v-card-actions>
@@ -54,22 +71,34 @@
             <v-form ref="paymentForm">
               <!-- Payment Information Form Fields -->
               <v-text-field
-                v-model="card_number"
+                v-model="formattedCardNumber"
                 label="Card Number"
                 prepend-icon="mdi-credit-card"
                 outlined
+                :rules="[
+                  (v) => !!v || 'Card Number is required',
+                  (v) => /^\d{4}(\s\d{4}){0,4}$/.test(v) || 'Invalid Card Number format',
+                ]"
               ></v-text-field>
               <v-text-field
                 v-model="card_expiration"
                 label="Expiration Date"
                 prepend-icon="mdi-calendar"
                 outlined
+                :rules="[
+                  (v) => !!v || 'Expiration Date is required',
+                  (v) => /^(0[1-9]|1[0-2])\/\d{2}$/.test(v) || 'Invalid Expiration Date format (MM/YY)',
+                ]"
               ></v-text-field>
               <v-text-field
                 v-model="card_cvv"
                 prepend-icon="mdi-lock"
                 label="CVV"
                 outlined
+                :rules="[
+                  (v) => !!v || 'CVV is required',
+                  (v) => /^\d{3,4}$/.test(v) || 'Invalid CVV format',
+                ]"
               ></v-text-field>
             </v-form>
             <v-card-actions>
@@ -170,7 +199,8 @@ export default {
       },
       card_number: '',
       card_expiration: '',
-      card_cvv: ''
+      card_cvv: '',
+      rawCardNumber: '',
     }
   },
   async created() {
@@ -179,7 +209,15 @@ export default {
   computed: {
     total() {
       return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-    }
+    },
+    formattedCardNumber: {
+      get() {
+        return this.rawCardNumber.replace(/\s?(\d{4})/g, '$1 ').trim();
+      },
+      set(value) {
+        this.rawCardNumber = value.replace(/\s/g, '');
+      },
+    },
   },
   watch: {
     overlay(val) {
@@ -196,7 +234,7 @@ export default {
         (this.order.city = 'Melbourne'),
         (this.order.state_province = 'VIC'),
         (this.order.zip_postal_code = '12345'),
-        (this.card_number = '1234 5678 9012 3456'),
+        (this.rawCardNumber = '1234 5678 9012 3456'),
         (this.card_expiration = '12/23'),
         (this.card_cvv = '123')
     },

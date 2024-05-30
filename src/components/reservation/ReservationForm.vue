@@ -6,12 +6,6 @@
           <v-card-title class="text-h5 font-weight-bold mb-4">Make a Reservation</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="isFormValid" lazy-validation>
-              <v-alert
-                density="compact"
-                text="No restrictive input validation. Please handle with care! :)"
-                title="-DEMO VERSION-"
-                type="warning"
-              ></v-alert>
               <v-col cols="12">
                 <p v-if="!restaurantName" class="p-3 mb-2 bg-info text-white">
                   Please select your Restaurant!
