@@ -5,6 +5,9 @@
 # Official Webstite link: https://demo-restaurantsystem.fly.dev/
 
 ## Side notes
+If you want to try it out, please pull the project to your PC then build the image with Docker.
+Required: [Docker](https://www.docker.com/products/docker-desktop/)
+
 - Project is containerized in Dockerfile run the following:
 -    `docker build -t restaurantsystem.frontend .`
 -    `docker run -p 8080:80`
