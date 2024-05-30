@@ -5,4 +5,6 @@
 # Official Webstite link: https://demo-restaurantsystem.fly.dev/
 
 ## Side notes
-- Project is containerized in Dockerfile run `docker build -t <name you pick> .` then `docker run -p 8080:80` to run the image
+- Project is containerized in Dockerfile run the following:
+-    `docker build -t restaurantsystem.frontend .`
+-    `docker run -p 8080:80`
