@@ -10,4 +10,4 @@ If you want to try it out, please pull the project to your PC then build the ima
 
 - Project is containerized in Dockerfile run the following:
 -    `docker build -t restaurantsystem.frontend .`
--    `docker run -p 8080:80`
+-    `docker run -p 8080:80 restaurantsystem.frontend`
